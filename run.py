@@ -83,7 +83,33 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/journal', methods=['GET', 'POST'])
+def journal():
+    if 'user' in session:
+        username = session['user']
 
+        if request.method == 'POST':
+            entry_content = request.form.get('content')
+            mongo.db.journal.insert_one({
+                'username': username,
+                'content': entry_content,
+                'timestamp': datetime.datetime.now()
+            })
+            flash('Journal entry added!')
+
+        # Retrieve all journal entries for the logged-in user
+        entries = mongo.db.journal.find({'username': username})
+
+        return render_template('journal.html', entries=entries)
+
+    flash('Please log in to access your journal')
+    return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash('You have been logged out.')
+    return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
