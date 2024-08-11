@@ -8,7 +8,6 @@ from flask_bcrypt import Bcrypt
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from skincare_package import routes
-
 if os.path.exists("env.py"):
     import env
 
@@ -113,9 +112,7 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(
-        host=os.environ.get("IP", "0.0.0.0"),
-        port=int(os.environ.get("PORT", 5000)),
-        debug=True
-    )
+    app.run(host=os.environ.get("IP"),
+            port=int(os.environ.get("PORT")),
+            debug=True)
 
