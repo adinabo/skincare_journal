@@ -1,13 +1,18 @@
 blinker==1.8.2
 click==8.0.1
 dnspython==2.0.0
-Flask==2.0.1
+Flask==2.2.0
 Flask-PyMongo==2.3.0
 greenlet==3.0.3
 itsdangerous==2.0.1
 Jinja2==3.0.3
-MarkupSafe==2.0.1
+MarkupSafe==2.1.1
 pymongo==3.11.0
+<<<<<<< HEAD
 Werkzeug==2.0.1
 Flask-Bcrypt==1.0.1 
 python-dotenv==1.0.1
+=======
+Werkzeug==2.2.0
+Flask-Bcrypt==1.0.1 
+>>>>>>> 08d5b8a1c3f359ce431ff417a7e8671c0cb02138
