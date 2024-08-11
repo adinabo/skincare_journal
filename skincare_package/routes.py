@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash, session
+from flask import render_template, request, redirect, url_for, flash, session, Flask
 from skincare_package import app, mongo
 
 @app.route('/')
