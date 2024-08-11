@@ -1,6 +1,6 @@
 <h1>Welcome, {{ session['user'] }}</h1>
 
-<form method="POST">
+<form method="POST" action="{{ url_for('journal') }}">
     <textarea name="content" placeholder="Write your journal entry here..." required></textarea>
     <button type="submit">Add Entry</button>
 </form>
