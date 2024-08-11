@@ -12,7 +12,7 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         
-        # Example authentication (you'll want to replace this with real logic)
+
         user = mongo.db.users.find_one({"username": username})
         
         if user and user["password"] == password:
@@ -24,14 +24,13 @@ def login():
 
     return render_template("login.html")
 
-@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
         # Add your registration logic here
         username = request.form.get("username")
         password = request.form.get("password")
         
-        # Example: Check if the username is already taken
+        # Check if the username is already taken
         existing_user = mongo.db.users.find_one({"username": username})
         
         if existing_user:
