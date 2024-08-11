@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from skincare_package import app
 
+
 if os.path.exists("env.py"):
     import env
 

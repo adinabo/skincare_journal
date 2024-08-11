@@ -1,9 +1,58 @@
 from flask import render_template, request, redirect, url_for, flash, session
 from skincare_package import app, mongo
 
-@app.route("/")
+@app.route('/')
 def home():
-    return render_template("home.html")
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        # Add your login logic here
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        # Example authentication (you'll want to replace this with real logic)
+        user = mongo.db.users.find_one({"username": username})
+        
+        if user and user["password"] == password:
+            session["user"] = username
+            return redirect(url_for("profile"))
+        else:
+            flash("Login failed. Please check your username and password.")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == "POST":
+        # Add your registration logic here
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        # Example: Check if the username is already taken
+        existing_user = mongo.db.users.find_one({"username": username})
+        
+        if existing_user:
+            flash("Username already exists. Please choose a different one.")
+            return redirect(url_for("register"))
+        
+        # Otherwise, create a new user
+        mongo.db.users.insert_one({"username": username, "password": password})
+        session["user"] = username
+        return redirect(url_for("profile"))
+
+    return render_template("register.html")
+
+@app.route('/profile')
+def profile():
+    if "user" in session:
+        username = session["user"]
+        return render_template("profile.html", username=username)
+    else:
+        return redirect(url_for("login"))
+
 
 @app.route("/routine")
 def routine():
@@ -24,4 +73,7 @@ def add_routine():
     skin_types = list(mongo.db.skin_type.find())
     return render_template("add_routine.html", skin_types=skin_types)
 
-# Other routes below
+@app.route('/logout')
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("home"))
