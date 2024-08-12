@@ -15,3 +15,4 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+from skincare_package import routes 
