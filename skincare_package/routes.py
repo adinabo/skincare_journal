@@ -8,11 +8,9 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-        # Add your login logic here
         username = request.form.get("username")
         password = request.form.get("password")
         
-
         user = mongo.db.users.find_one({"username": username})
         
         if user and user["password"] == password:
@@ -24,20 +22,18 @@ def login():
 
     return render_template("login.html")
 
+@app.route('/register', methods=['GET', 'POST'])  # Added the missing route decorator
 def register():
     if request.method == "POST":
-        # Add your registration logic here
         username = request.form.get("username")
         password = request.form.get("password")
         
-        # Check if the username is already taken
         existing_user = mongo.db.users.find_one({"username": username})
         
         if existing_user:
             flash("Username already exists. Please choose a different one.")
             return redirect(url_for("register"))
         
-        # Otherwise, create a new user
         mongo.db.users.insert_one({"username": username, "password": password})
         session["user"] = username
         return redirect(url_for("profile"))
@@ -51,7 +47,6 @@ def profile():
         return render_template("profile.html", username=username)
     else:
         return redirect(url_for("login"))
-
 
 @app.route("/routine")
 def routine():

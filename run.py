@@ -1,7 +1,8 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from skincare_package import app
 
+app = Flask(__name__)
 
 if os.path.exists("env.py"):
     import env
