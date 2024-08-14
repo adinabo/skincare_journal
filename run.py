@@ -46,6 +46,15 @@ def register():
 
     return render_template("register.html")
 
+@app.route('/profile')
+def profile():
+    if "user" in session:
+        username = session["user"]
+        return render_template("profile.html", username=username)
+    else:
+        return redirect(url_for("login"))
+
+    
 #def seed_database():
     # Check if users collection is empty
 #    if models.users_collection.count_documents({}) == 0:

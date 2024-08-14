@@ -6,15 +6,6 @@ def home():
     return render_template('home.html')
 
 
-
-@app.route('/profile')
-def profile():
-    if "user" in session:
-        username = session["user"]
-        return render_template("profile.html", username=username)
-    else:
-        return redirect(url_for("login"))
-
 @app.route("/routine")
 def routine():
     routine_list = list(mongo.db.users_routines.find())
