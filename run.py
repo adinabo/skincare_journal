@@ -28,6 +28,23 @@ def login():
 
     return render_template("login.html")
 
+@app.route('/register', methods=['GET', 'POST'])  # Added the missing route decorator
+def register():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        existing_user = mongo.db.users.find_one({"username": username})
+        
+        if existing_user:
+            flash("Username already exists. Please choose a different one.")
+            return redirect(url_for("register"))
+        
+        mongo.db.users.insert_one({"username": username, "password": password})
+        session["user"] = username
+        return redirect(url_for("profile"))
+
+    return render_template("register.html")
 
 #def seed_database():
     # Check if users collection is empty
