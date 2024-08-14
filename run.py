@@ -11,6 +11,24 @@ if os.path.exists("env.py"):
 def home():
     return render_template('home.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        user = mongo.db.users.find_one({"username": username})
+        
+        if user and user["password"] == password:
+            session["user"] = username
+            return redirect(url_for("profile"))
+        else:
+            flash("Login failed. Please check your username and password.")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+
 #def seed_database():
     # Check if users collection is empty
 #    if models.users_collection.count_documents({}) == 0:
