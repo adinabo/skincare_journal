@@ -7,6 +7,10 @@ app = Flask(__name__)
 if os.path.exists("env.py"):
     import env
 
+@app.route('/')
+def home():
+    return render_template('home.html')
+
 #def seed_database():
     # Check if users collection is empty
 #    if models.users_collection.count_documents({}) == 0:
