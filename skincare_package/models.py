@@ -1,4 +1,3 @@
-from skincare_package import db
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
