@@ -11186,7 +11186,7 @@ body {
 /*****************************************************************************Login Form*****/
 body,
 .bg-image-login {
-  background: url('/skincare_package/static/images/bg-form.jpg');
+  background: url('/static/images/bg-form.jpg'); 
   background-size: cover ;
   background-position: center;
   background-position: center;
