@@ -58,7 +58,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
     const formData = new FormData(this);
 
-    fetch('/login', {  // Replace with your actual login route
+    fetch('/login', {  // actual login route
         method: 'POST',
         body: formData
     })
@@ -67,7 +67,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         const loginMessage = document.getElementById('loginMessage');
         if (data.success) {
             // Redirect to the user's profile or homepage
-            window.location.href = '/profile';  // Replace with the actual redirect route
+            window.location.href = '/profile_skintype';  // Replace with the actual redirect route
         } else {
             // Display error message
             loginMessage.textContent = 'Login failed: ' + data.message;
@@ -103,5 +103,32 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     .catch(error => {
         console.error('Error:', error);
         document.getElementById('registerMessage').textContent = 'An error occurred. Please try again.';
+    });
+});
+
+//skintype form
+document.getElementById('SkinTypeForm').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent the default form submission
+
+    const formData = new FormData(this);
+
+    fetch('/profile_skintype', {  // route for skin type submission
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const skinTypeMessage = document.getElementById('skinTypeMessage');
+        if (data.success) {
+            // Redirect to the next step or another page
+            window.location.href = '/profile';  // Replace with the actual redirect route
+        } else {
+            // Display error message
+            skinTypeMessage.textContent = 'Submission failed: ' + data.message;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('skinTypeMessage').textContent = 'An error occurred. Please try again.';
     });
 });

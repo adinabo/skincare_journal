@@ -93,13 +93,41 @@ def register():
     return render_template("register.html")
 
 
+def jls_extract_def():
+    
+    return 
+
+
 @app.route('/profile_skintype', methods=["GET", "POST"])
 def profile_skintype():
-    if "user" in session:
-        username = session["user"]
-        return render_template("profile_skintype.html", username=username)
-    else:
-        return redirect(url_for("login"))
+    if request.method == "POST":
+        # Get the selected skin type from the form
+        selected_skin_type = request.form.get('group1')
+
+        # Check if the user is logged in
+        if "user" in session:
+            username = session["user"]
+
+            # Update the user's skin type in the database
+            mongo.db.user_skintype.update_one(
+                {"username": username},
+                {"$set": {"skin_type": selected_skin_type}},
+                upsert=True
+            )
+
+            flash("Skin type updated successfully!")
+            return redirect(url_for('profile'))  # Redirect to the same page or another page as needed
+        else:
+            flash("Please log in to update your skin type.")
+            return redirect(url_for('login'))  # Redirect to login if the user is not logged in
+
+    # Render the profile skintype form
+    return render_template("profile_skintype.html")
+
+
+@app.route('/profile')
+def profile():
+    return "Next step after skin type selection"
 
 
 if __name__ == "__main__":

@@ -8,44 +8,38 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="container">
-    <!-- Welcome message using Jinja -->
-    <h3>Welcome, {{ session['user'] }}</h5>
+    <h4>Welcome, {{ session['user'] }}</h4>
     <h5>Please select your skin type from the list below:</h5>
-    <!-- Form with radio buttons -->
-    <form method="POST" action="{{ url_for('profile_skintype') }}">
-        <p>
-            <label>
-                <input name="group1" type="radio" checked />
-                <span>Oily</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input name="group1" type="radio" />
-                <span>Dry</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input class="with-gap" name="group1" type="radio" />
-                <span>Combination</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input name="group1" type="radio" disabled="disabled" />
-                <span>Sensitive</span>
-            </label>
-        </p>
-    </form>
-    <div class="d-grid">
-        <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Next</button>
+    <div class="container">
+        <form id="SkinTypeForm" class="col s12 m8 offset-m2" method="POST" action="{{ url_for('profile_skintype') }}">
+                    <input name="group1" type="radio" value="Oily" checked />
+                    <span>Oily</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="group1" type="radio" value="Dry" />
+                    <span>Dry</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="with-gap" name="group1" type="radio" value="Combination" />
+                    <span>Combination</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="group1" type="radio" value="Sensitive" disabled="disabled" />
+                    <span>Sensitive</span>
+                </label>
+            </p>
+            <div class="input-field">
+                <button class="btn waves-effect waves-light" type="submit">Next</button>
+            </div>
+        </form>
     </div>
-</div>
-
-<!-- Materialize JS and dependencies -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
