@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet" />
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 </head>
 <body class="bg-image-login">
     <div class="container">
@@ -18,7 +20,7 @@
                 <div class="card z-depth-5 my-5">
                     <div class="card-content">
                         <h5 class="center-align mb-5">Log In</h5>
-                        <form id="loginForm" class="col s12" method="POST" action="{{ url_for('profile_skintype') }}">
+                        <form id="loginForm" method="POST" action="{{ url_for('profile_skintype') }}">
                             <div class="input-field">
                                 <input type="text" id="username" name="username" class="validate" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
                                 <label for="username">Username</label>
@@ -30,8 +32,7 @@
                                 <span class="helper-text" data-error="Invalid password" data-success="Valid"></span>
                             </div>
                             <div class="input-field">
-                                <button class="btn waves-effect waves-light btn-large" type="submit">Sign in
-                                </button>
+                                <button class="btn waves-effect waves-light btn-large" type="submit">Sign in</button>
                             </div>
                             <div class="row">
                                 <div class="col s12 center-align">
@@ -46,5 +47,6 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

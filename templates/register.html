@@ -10,26 +10,27 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet" />
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 </head>
 <body class="bg-image-login">
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card border-0 shadow rounded-3 my-5">
-                    <div class="card-body p-4 p-sm-5">
-                        <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
-                        <form id="registerForm" class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username" required>
-                                <label for="floatingInput">Username</label>
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+                <div class="card z-depth-5 my-5">
+                    <div class="card-content">
+                        <h5 class="card-title center-align mb-5">Register</h5>
+                        <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+                            <div class="input-field">
+                                <input type="text" id="username" name="username" class="validate" required>
+                                <label for="username">Username</label>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
-                                <label for="floatingPassword">Password</label>
+                            <div class="input-field">
+                                <input type="password" id="password" name="password" class="validate" required>
+                                <label for="password">Password</label>
                             </div>
-                            <div class="form mb-3"></div>
-                            <div class="d-grid">
-                                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Register</button>
+                            <div class="input-field">
+                                <button class="btn waves-effect waves-light btn-large" type="submit">Register</button>
                             </div>
                         </form>
                     </div>
@@ -37,5 +38,6 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
