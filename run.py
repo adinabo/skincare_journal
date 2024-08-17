@@ -128,6 +128,40 @@ def profile_skintype():
 def profile():
     return render_template("profile.html")
 
+#to review this route
+@app.route('/add_routine', methods=["POST"])
+def add_routine():
+    if "user" in session:
+        username = session["user"]
+
+        # Example of how you might gather data from a form
+        routine = [
+            {
+                "step_name": request.form.get("step_name1"),
+                "product_used": request.form.get("product_used1"),
+                "time_of_day": request.form.get("time_of_day1"),
+            },
+            {
+                "step_name": request.form.get("step_name2"),
+                "product_used": request.form.get("product_used2"),
+                "time_of_day": request.form.get("time_of_day2"),
+            }
+            # Add as many steps as needed
+        ]
+
+        # Store the routine in the database
+        mongo.db.routines.insert_one({
+            "username": username,
+            "routine": routine
+        })
+
+        flash("Routine added successfully!")
+        return redirect(url_for('profile'))
+
+    else:
+        flash("Please log in to add a routine.")
+        return redirect(url_for('login'))
+
 
 if __name__ == "__main__":
     # Run the Flask application

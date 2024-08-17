@@ -133,4 +133,24 @@ document.getElementById('SkinTypeForm').addEventListener('submit', function(even
     });
 });
 
-//profile
+//profile page
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+});
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+    var sidenavElems = document.querySelectorAll('.sidenav');
+    var sidenavInstances = M.Sidenav.init(sidenavElems);
+});
+
+  
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+  var collapsibleElem = document.querySelector('.collapsible');
+  var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
