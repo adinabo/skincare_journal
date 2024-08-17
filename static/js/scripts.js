@@ -132,3 +132,5 @@ document.getElementById('SkinTypeForm').addEventListener('submit', function(even
         document.getElementById('skinTypeMessage').textContent = 'An error occurred. Please try again.';
     });
 });
+
+//profile

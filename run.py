@@ -114,7 +114,6 @@ def profile_skintype():
                 {"$set": {"skin_type": selected_skin_type}},
                 upsert=True
             )
-
             flash("Skin type updated successfully!")
             return redirect(url_for('profile'))  # Redirect to the same page or another page as needed
         else:
@@ -127,7 +126,7 @@ def profile_skintype():
 
 @app.route('/profile')
 def profile():
-    return "Next step after skin type selection"
+    return render_template("profile.html")
 
 
 if __name__ == "__main__":
