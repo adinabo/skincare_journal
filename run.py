@@ -9,14 +9,30 @@ from skincare_package import app, models
 
 app = Flask(__name__)
 
+# Load MongoDB URI from environment variable
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
+
+# Print the MongoDB URI to verify it's being loaded correctly 
+print(f"Mongo URI: {os.getenv('MONGO_URI')}")
+
+
 if os.path.exists("env.py"):
     import env
+
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
+
+# Check if the MongoDB connection is successful
+if mongo.db is None:
+    print("Failed to initialize MongoDB connection!")
+else:
+    print("MongoDB connection initialized successfully!")
+
 
 @app.route('/')
 def home():
@@ -50,7 +66,6 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
-
 
 
 @app.route("/register", methods=["GET", "POST"])
