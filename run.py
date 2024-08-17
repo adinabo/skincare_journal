@@ -54,7 +54,7 @@ def login():
                         flash("Welcome, {}".format(
                             request.form.get("username")))
                         return redirect(url_for(
-                            "profile", username=session["user"]))
+                            "profile_skintype", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -88,16 +88,16 @@ def register():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("profile_skintype", username=session["user"]))
 
     return render_template("register.html")
 
 
-@app.route('/profile')
-def profile():
+@app.route('/profile_skintype', methods=["GET", "POST"])
+def profile_skintype():
     if "user" in session:
         username = session["user"]
-        return render_template("profile.html", username=username)
+        return render_template("profile_skintype.html", username=username)
     else:
         return redirect(url_for("login"))
 

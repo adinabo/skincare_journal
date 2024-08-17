@@ -14,7 +14,7 @@
     <h3>Welcome, {{ session['user'] }}</h5>
     <h5>Please select your skin type from the list below:</h5>
     <!-- Form with radio buttons -->
-    <form method="POST" action="{{ url_for('profile') }}">
+    <form method="POST" action="{{ url_for('profile_skintype') }}">
         <p>
             <label>
                 <input name="group1" type="radio" checked />
