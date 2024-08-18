@@ -11193,3 +11193,10 @@ body,
   background-repeat: repeat;
   background-attachment: scroll;
 }
+/********************************************************************************Profile page**/
+.fadeout {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)), url('/static/images/bg-masthead.jpg');
+  height: 100vh; 
+  margin: 0; 
+  background-size: cover;
+}

@@ -126,7 +126,25 @@ def profile_skintype():
 
 @app.route('/profile')
 def profile():
+    if request.method == "POST":
+        
+        selected_skin_type = request.form.get('group1')
+
+        # Check if the user is logged in
+        if "user" in session:
+            username = session["user"]
+
     return render_template("profile.html")
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+
+    flash("You have been logged out successfully.", "info")
+
+    return redirect(url_for('home'))
+
 
 #to review this route
 @app.route('/add_routine', methods=["POST"])
