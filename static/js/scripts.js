@@ -48,3 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
     M.FormSelect.init(selectElems);
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Sidenav
+    var sidenavElems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenavElems);
+});

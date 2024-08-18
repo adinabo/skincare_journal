@@ -23,24 +23,22 @@
             <a href="#" class="brand-logo"><h5>{{ session['user'] }}</h5></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 <li><a href="{{ url_for('profile') }}">Add entry</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Sidenav -->
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         <li><a href="{{ url_for('profile') }}">Add entry</a></li>
+        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
     </ul>
-
     <!-- Main Content -->
     <section class="section center-align">
         <div class="container">
             {% block content %}
             <h5>Your skintype is {{ session['user_skintype'] }}</h5>
-
             <!-- Display Skincare Entries -->
             <h6>Skincare Entry History</h6>
             <ul class="collection">
@@ -60,12 +58,5 @@
             {% endblock %}
         </div>
     </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Sidenav
-            var sidenavElems = document.querySelectorAll('.sidenav');
-            M.Sidenav.init(sidenavElems);
-        });
-    </script>
 </body>
 </html>

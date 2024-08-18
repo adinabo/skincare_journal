@@ -125,7 +125,7 @@ def profile_skintype():
     # Render the profile skintype form
     return render_template("profile_skintype.html")
 
-
+# Profile page where users can add entries 
 @app.route('/profile', methods=["GET", "POST"])
 def profile():
     if request.method == "POST":
@@ -153,14 +153,7 @@ def profile():
             flash("Please log in to save your skincare entry.", "error")
             return redirect(url_for('login'))
 
-    # Retrieve all skincare entries for the logged-in user
-    if "user" in session:
-        username = session["user"]
-        entries = list(mongo.db.skincare_entries.find({"username": username}))
-    else:
-        entries = []
-
-    return render_template("profile.html", entries=entries)
+    return render_template("profile.html")
 
 
 @app.route('/profile_routine', methods=["GET", "POST"])
@@ -173,9 +166,7 @@ def profile_routine():
         # If the user is not logged in, initialize entries as an empty list
         entries = []
 
-    # Render the profile_routine template with the retrieved entries
     return render_template("profile_routine.html", entries=entries)
-
 
 
 @app.route('/logout')
