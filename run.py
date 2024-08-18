@@ -6,6 +6,8 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from skincare_package import app, models
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -141,7 +143,8 @@ def profile():
                 "username": username,
                 "skincare_step": selected_skin_type,
                 "product_name": product_name,
-                "time_of_day": time_of_day
+                "time_of_day": time_of_day,
+                "created_at": datetime.utcnow()  # Store the timestamp of the entry
             })
 
             flash("Skincare entry saved successfully!", "success")
@@ -150,7 +153,14 @@ def profile():
             flash("Please log in to save your skincare entry.", "error")
             return redirect(url_for('login'))
 
-    return render_template("profile.html")
+    # Retrieve all skincare entries for the logged-in user
+    if "user" in session:
+        username = session["user"]
+        entries = list(mongo.db.skincare_entries.find({"username": username}))
+    else:
+        entries = []
+
+    return render_template("profile.html", entries=entries)
 
 
 @app.route('/logout')
