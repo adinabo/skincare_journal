@@ -163,6 +163,21 @@ def profile():
     return render_template("profile.html", entries=entries)
 
 
+@app.route('/profile_routine', methods=["GET", "POST"])
+def profile_routine():
+    if "user" in session:
+        username = session["user"]
+        # Retrieve all skincare entries for the logged-in user
+        entries = list(mongo.db.skincare_entries.find({"username": username}))
+    else:
+        # If the user is not logged in, initialize entries as an empty list
+        entries = []
+
+    # Render the profile_routine template with the retrieved entries
+    return render_template("profile_routine.html", entries=entries)
+
+
+
 @app.route('/logout')
 def logout():
     session.clear()
