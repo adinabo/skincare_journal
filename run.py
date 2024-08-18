@@ -124,15 +124,31 @@ def profile_skintype():
     return render_template("profile_skintype.html")
 
 
-@app.route('/profile')
+@app.route('/profile', methods=["GET", "POST"])
 def profile():
     if request.method == "POST":
-        
-        selected_skin_type = request.form.get('group1')
+        # Get the selected skincare step, product name, and time of day from the form
+        selected_skin_type = request.form.get('skincare_step')
+        product_name = request.form.get('product_name')
+        time_of_day = request.form.get('time_of_day')
 
         # Check if the user is logged in
         if "user" in session:
             username = session["user"]
+
+            # Save the skincare data into the MongoDB collection
+            mongo.db.skincare_entries.insert_one({
+                "username": username,
+                "skincare_step": selected_skin_type,
+                "product_name": product_name,
+                "time_of_day": time_of_day
+            })
+
+            flash("Skincare entry saved successfully!", "success")
+            return redirect(url_for('profile'))
+        else:
+            flash("Please log in to save your skincare entry.", "error")
+            return redirect(url_for('login'))
 
     return render_template("profile.html")
 
