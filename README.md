@@ -54,3 +54,12 @@ The Skincare Routine Tracker is a simple yet powerful app designed to assist use
 - Chrome developer tools
 - Pexels for images
 
+## Installation
+
+To install the game locally, follow these steps:
+
+1. Clone the repository using the following command:
+
+git clone https://
+
+2. Open the project folder and open home.html in your preferred browser.
