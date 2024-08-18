@@ -38,5 +38,13 @@ function handleFormSubmit(formId, fetchUrl, redirectUrl, messageId) {
     });
 }
 
-// Initialize Materialize Components
-document.addEventListe
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Sidenav
+    var sidenavElems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenavElems);
+
+    // Initialize Selects
+    var selectElems = document.querySelectorAll('select');
+    M.FormSelect.init(selectElems);
+
+});

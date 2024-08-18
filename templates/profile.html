@@ -39,7 +39,25 @@
         <div class="container">
             {% block content %}
             <h5>Your skintype is {{ session['user_skintype'] }}</h5>
-            <!-- Form example -->
+
+            <!-- Display Skincare Entries -->
+            <h6>Skincare Entry History</h6>
+            <ul class="collection">
+                {% for entry in entries %}
+                <li class="collection-item">
+                    <strong>Step:</strong> {{ entry.skincare_step }} <br>
+                    <strong>Product:</strong> {{ entry.product_name }} <br>
+                    <strong>Time of Day:</strong> {{ entry.time_of_day }} <br>
+                    {% if entry.created_at %}
+                        <em>{{ entry.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</em>
+                    {% else %}
+                        <em>Timestamp not available</em>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Form for new skincare entry -->
             <form id="SkinTypeForm" method="POST" action="{{ url_for('profile') }}">
                 <div class="input-field">
                     <select name="skincare_step" required>
@@ -51,12 +69,12 @@
                     </select>
                     <label>Skincare Step</label>
                 </div>
-            
+
                 <div class="input-field">
                     <input type="text" name="product_name" id="product_name" required>
                     <label for="product_name">Product Name</label>
                 </div>
-            
+
                 <div class="input-field">
                     <select name="time_of_day" required>
                         <option value="" disabled selected>Choose time of day</option>
@@ -65,31 +83,15 @@
                     </select>
                     <label>Time of Day</label>
                 </div>
-            
+
                 <div class="input-field">
                     <button class="btn waves-effect waves-light" type="submit">Save Entry</button>
                 </div>
-            
+
                 <div id="skinTypeMessage"></div>
             </form>
-            
             {% endblock %}
         </div>
     </section>
-
-    <!-- Initialize Materialize Components -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Sidenav
-            var sidenavElems = document.querySelectorAll('.sidenav');
-            M.Sidenav.init(sidenavElems);
-
-            // Initialize Selects
-            var selectElems = document.querySelectorAll('select');
-            M.FormSelect.init(selectElems);
-
-            // Initialize any other Materialize components here
-        });
-    </script>
 </body>
 </html>
