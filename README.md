@@ -17,3 +17,16 @@ Maintaining a consistent and effective skincare routine can be challenging, espe
 2. Timing and Order: The effectiveness of skincare products can depend significantly on the order of application and the time of day they are used.
 
 3. Product Incompatibility: Certain skincare ingredients should not be mixed due to potential adverse reactions or reduced efficacy.
+### The Solution:
+The Skincare Routine Tracker is a simple yet powerful app designed to assist users in managing their evening skincare routines. By allowing users to log their skincare products, the app can generate a personalized routine that maximizes the benefits of each product while ensuring safe and effective use.
+
+
+**Target audience:**
+
+
+**Real-World Application:**
+
+
+## UX Design Process
+
+### Wireframes and Mock-ups 
