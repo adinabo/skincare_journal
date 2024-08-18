@@ -30,3 +30,27 @@ The Skincare Routine Tracker is a simple yet powerful app designed to assist use
 ## UX Design Process
 
 ### Wireframes and Mock-ups 
+![Inital wireframes]()
+
+### Design Decisions and Reasoning
+
+
+## Features
+
+**Product Logging:** Users can create a profile, log in and input and store information about their skincare products.
+**Personalized Routine Generation:** Based on the logged products, the app creates a customized routine tailored to the user's specific needs and preferences.
+**Guidance on Product Use:** The app provides recommendations on the optimal timing and order of application for each product.
+
+
+## Technologies Used
+
+- HTML
+- CSS
+- Python
+- Mongo
+- Figma for Wireframes
+- Git and Github for version control
+- Visual Studio Code
+- Chrome developer tools
+- Pexels for images
+
