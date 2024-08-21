@@ -18,11 +18,13 @@ Maintaining a consistent and effective skincare routine can be challenging, espe
 
 3. Product Incompatibility: Certain skincare ingredients should not be mixed due to potential adverse reactions or reduced efficacy.
 ### The Solution:
-The Skincare Routine Tracker is a simple yet powerful app designed to assist users in managing their evening skincare routines. By allowing users to log their skincare products, the app can generate a personalized routine that maximizes the benefits of each product while ensuring safe and effective use.
+
+The Skincare Routine Tracker is a simple app designed to assist users in managing their skincare routines. By allowing users to log their skincare products, the app helps them keep track of the products used.
 
 
 **Target audience:**
 
+Individuals, particularly women, who are passionate about maintaining and optimizing their skincare routines. This includes anyone interested in tracking their daily skincare habits, monitoring product usage, and improving their overall skin health through consistent and informed practices. 
 
 **Real-World Application:**
 
