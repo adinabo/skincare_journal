@@ -79,3 +79,56 @@ The website was successfully deployed to GitHub. Steps to deploy it:
 The live site can be found at the following link: https:/
 
 ## Bugs
+## UX Scope Testing
+
+
+1. User Interface (UI) Testing:
+
+
+2. User Experience (UX) Testing:
+
+
+
+## Manual Testing
+
+Principles:
+
+Human Insight: Manual testing leverages human intuition and experience to identify issues that automated tests might overlook.
+
+Flexibility: Manual testers can adapt to changes and explore the game in creative ways, beyond predefined test cases.
+
+User Experience: Manual testing is essential for evaluating the game's user interface and overall user experience.
+
+Exploratory Testing: Manual testers can actively explore the game to uncover unexpected behavior and bugs.
+
+**Game Reset Test:**
+
+**Device Compatibility Test:**
+
+## Automated Testing
+
+**Principles:**
+
+
+- WS3 HTML Testing Validator
+
+[W3C Validator](https://validator.w3.org/)
+![HTML testing result](/assets/images/)
+
+- CSS 
+
+[CSS Validator](https://validator.w3.org/)
+![CSS testing result](/assets/images/)
+
+- 
+
+
+[CSS testing result](https://www.jslint.com/)
+![JavaScript testing result](/assets/images/)
+
+- Google Lighthouse
+
+![Google Lighthouse desktop performance](/assets/images/)
+![Google Lighthouse mobile performance](/assets/images/)
+
+## User Stories
