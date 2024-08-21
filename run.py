@@ -177,7 +177,26 @@ def logout():
 
     return redirect(url_for('home'))
 
+@app.route('/delete_entry/<entry_id>', methods=["POST"])
+def delete_entry(entry_id):
+    if "user" in session:
+        username = session["user"]
 
+        # Ensure the entry belongs to the logged-in user and delete it
+        result = mongo.db.skincare_entries.delete_one({
+            "_id": ObjectId(entry_id), 
+            "username": username
+        })
+
+        if result.deleted_count > 0:
+            flash("Entry deleted successfully!", "success")
+        else:
+            flash("Entry not found or not authorized to delete.", "error")
+    else:
+        flash("You need to be logged in to delete an entry.", "error")
+
+    return redirect(url_for('profile_routine'))
+    
 #to review this route
 @app.route('/add_routine', methods=["POST"])
 def add_routine():

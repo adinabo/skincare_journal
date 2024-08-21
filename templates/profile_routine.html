@@ -52,6 +52,11 @@
                     {% else %}
                         <em>Timestamp not available</em>
                     {% endif %}
+                    <form method="POST" action="{{ url_for('delete_entry', entry_id=entry._id) }}" style="display:inline;">
+                        <button type="submit" class="btn waves-effect waves-light red">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </form>
                 </li>
                 {% endfor %}
             </ul>
