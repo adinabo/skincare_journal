@@ -63,3 +63,19 @@ To install the game locally, follow these steps:
 git clone https://
 
 2. Open the project folder and open home.html in your preferred browser.
+
+## Deployment
+
+The website was successfully deployed to GitHub. Steps to deploy it:
+
+1. Go to the **Settings** tab in the GitHub repository.
+
+2. Scroll down to **GitHub Pages** and click on **"Check it out here!"**
+
+3. Make sure to choose **"main"** under **"Source"**.
+
+4. The page will automatically refresh, showing a detailed ribbon display confirming the deployment.
+
+The live site can be found at the following link: https:/
+
+## Bugs
