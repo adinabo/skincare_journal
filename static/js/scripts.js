@@ -49,8 +49,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Sidenav
-    var sidenavElems = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(sidenavElems);
-});
+M.toast({html: 'I am a toast!'})

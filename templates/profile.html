@@ -39,10 +39,10 @@
     <section class="section center-align">
         <div class="container">
             {% block content %}
-            <h5>Your skintype is {{ session['user_skintype'] }}</h5>
+            <div id="skinTypeMessage"><h5>Your skintype is {{ session['user_skintype'] }}</h5></div> 
 
             <!-- Display Skincare Entries -->
-            <h6>Skincare Entry History</h6>
+            <h6>Skincare Routine</h6>
             <ul class="collection">
                 {% for entry in entries %}
                 <li class="collection-item">
@@ -86,10 +86,8 @@
                 </div>
 
                 <div class="input-field">
-                    <button class="btn waves-effect waves-light" type="submit">Save Entry</button>
-                </div>
-
-                <div id="skinTypeMessage"></div>
+                    <button class="btn waves-effect waves-light" type="submit" onclick="M.toast({html: 'Your entry was saved'})">Save Entry</button>
+                    </div>
             </form>
             {% endblock %}
         </div>
