@@ -39,14 +39,89 @@
     <section class="section center-align">
         <div class="container">
             {% block content %}
-            <div id="skinTypeMessage"><h5>Your skintype is {{ session['user_skintype'] }}</h5></div> 
+            <div id="skinTypeMessage">
+                <h5>Your skin type is: {{ session['user_skintype'] if 'user_skintype' in session else 'Not set' }}
+                    <a class="btn-small waves-effect waves-light modal-trigger pink darken-2 " href="#changeSkinTypeModal">
+                        <i class="material-icons">update skin type</i> 
+                    </a>
+                </h5>
+            </div>
 
+            <!-- Modal Structure -->
+            <div id="changeSkinTypeModal" class="modal">
+                <div class="modal-content">
+                    <h4>Change Skin Type</h4>
+                    <form id="ChangeSkinTypeForm" method="POST" action="{{ url_for('profile_skintype') }}">
+                        <div class="input-field">
+                            <p>
+                                <label>
+                                    <input name="group1" type="radio" value="Oily" />
+                                    <span>Oily</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input name="group1" type="radio" value="Dry" />
+                                    <span>Dry</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input name="group1" type="radio" value="Combination" />
+                                    <span>Combination</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input name="group1" type="radio" value="Sensitive" />
+                                    <span>Sensitive</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="modal-close btn waves-effect waves-light pink darken-2">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <!-- Display Skincare Entries -->
             <h6>Skincare Routine</h6>
             <ul class="collection">
                 {% for entry in entries %}
                 <li class="collection-item">
-                    <strong>Step:</strong> {{ entry.skincare_step }} <br>
+                    <strong>Step:</strong> {{ entry.skincare_step }} <br>@app.route('/profile_skintype', methods=["GET", "POST"])
+                    def profile_skintype():
+                        if request.method == "POST":
+                            # Get the selected skin type from the form
+                            selected_skin_type = request.form.get('group1')
+                    
+                            # Check if the user is logged in
+                            if "user" in session:
+                                username = session["user"]
+                    
+                                # Update the user's skin type in the database
+                                try:
+                                    mongo.db.user_skintype.update_one(
+                                        {"username": username},
+                                        {"$set": {"skin_type": selected_skin_type}},
+                                        upsert=True
+                                    )
+                                    
+                                    # Update the session variable to reflect the new skin type
+                                    session["user_skintype"] = selected_skin_type
+                    
+                                    flash("Skin type updated successfully!")
+                                except Exception as e:
+                                    print(f"Error updating skin type: {e}")
+                                    flash("An error occurred while updating your skin type.")
+                                
+                                return redirect(url_for('profile'))
+                            else:
+                                flash("Please log in to update your skin type.")
+                                return redirect(url_for('login'))
+                    
+                        return render_template("profile_skintype.html")
+                    
                     <strong>Product:</strong> {{ entry.product_name }} <br>
                     <strong>Time of Day:</strong> {{ entry.time_of_day }} <br>
                     {% if entry.created_at %}
@@ -91,7 +166,7 @@
                                 </div>
 
                                 <div class="input-field center-align">
-                                    <button class="btn waves-effect waves-light pink darken-2" type="submit" onclick="M.toast({html: 'Your entry was saved'})">Save Entry</button>
+                                    <button class="btn waves-effect waves-light pink darken-2" type="submit" id="saveEntryButton">Save Entry</button>
                                 </div>
                             </form>
                         </div>
@@ -101,5 +176,15 @@
             {% endblock %}
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.modal');
+            M.Modal.init(elems);
+
+            var selectElems = document.querySelectorAll('select');
+            M.FormSelect.init(selectElems);
+        });
+    </script>
 </body>
 </html>

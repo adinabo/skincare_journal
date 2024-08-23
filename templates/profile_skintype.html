@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Selection</title>
-    <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +12,9 @@
     <h5>Please select your skin type from the list below:</h5>
     <div class="container">
         <form id="SkinTypeForm" class="col s12 m8 offset-m2" method="POST" action="{{ url_for('profile_skintype') }}">
-                    <input name="group1" type="radio" value="Oily" checked />
+            <p>
+                <label>    
+                    <input name="group1" type="radio" value="Oily" />
                     <span>Oily</span>
                 </label>
             </p>
@@ -25,13 +26,13 @@
             </p>
             <p>
                 <label>
-                    <input class="with-gap" name="group1" type="radio" value="Combination" />
+                    <input name="group1" type="radio" value="Combination" />
                     <span>Combination</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="group1" type="radio" value="Sensitive" disabled="disabled" />
+                    <input name="group1" type="radio" value="Sensitive" />
                     <span>Sensitive</span>
                 </label>
             </p>
@@ -40,7 +41,8 @@
             </div>
         </form>
     </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
-

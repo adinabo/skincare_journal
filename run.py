@@ -29,7 +29,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Check if the MongoDB connection is successful
+# To check if the MongoDB connection is successful
 if mongo.db is None:
     print("Failed to initialize MongoDB connection!")
 else:
@@ -43,6 +43,38 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        # check if username exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                    existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+
+                # Retrieve skin type from the database and store it in the session
+                user_skintype = mongo.db.user_skintype.find_one(
+                    {"username": session["user"]}
+                )
+                if user_skintype:
+                    session["user_skintype"] = user_skintype.get("skin_type")
+                    print("Skin type retrieved:", session["user_skintype"])  # Debugging
+
+                flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for("profile_skintype"))
+            else:
+                # invalid password match
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
+        else:
+            # username doesn't exist
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
@@ -103,27 +135,37 @@ def jls_extract_def():
 @app.route('/profile_skintype', methods=["GET", "POST"])
 def profile_skintype():
     if request.method == "POST":
-        # Get the selected skin type from the form
+
         selected_skin_type = request.form.get('group1')
 
         # Check if the user is logged in
         if "user" in session:
             username = session["user"]
 
-            # Update the user's skin type in the database
-            mongo.db.user_skintype.update_one(
-                {"username": username},
-                {"$set": {"skin_type": selected_skin_type}},
-                upsert=True
-            )
-            flash("Skin type updated successfully!")
-            return redirect(url_for('profile'))  # Redirect to the same page or another page as needed
+            try:
+                mongo.db.user_skintype.update_one(
+                    {"username": username},
+                    {"$set": {"skin_type": selected_skin_type}},
+                    upsert=True
+                )
+                
+                # Update session variable to show new skin type
+                session["user_skintype"] = selected_skin_type
+
+                flash("Skin type updated successfully!")
+            except Exception as e:
+                print(f"Error updating skin type: {e}")
+                flash("An error occurred while updating your skin type.")
+            
+            return redirect(url_for('profile'))
         else:
             flash("Please log in to update your skin type.")
-            return redirect(url_for('login'))  # Redirect to login if the user is not logged in
+            return redirect(url_for('login'))
 
-    # Render the profile skintype form
     return render_template("profile_skintype.html")
+
+
+
 
 # Profile page where users can add entries 
 @app.route('/profile', methods=["GET", "POST"])
@@ -134,20 +176,32 @@ def profile():
         product_name = request.form.get('product_name')
         time_of_day = request.form.get('time_of_day')
 
+        # Debugging: Print the form data to check what is being received
+        print("Form Data Received:")
+        print("Skincare Step:", selected_skin_type)
+        print("Product Name:", product_name)
+        print("Time of Day:", time_of_day)
+
         # Check if the user is logged in
         if "user" in session:
             username = session["user"]
+            print("Username from session:", username)  # Debugging
 
-            # Save the skincare data into the MongoDB collection
-            mongo.db.skincare_entries.insert_one({
-                "username": username,
-                "skincare_step": selected_skin_type,
-                "product_name": product_name,
-                "time_of_day": time_of_day,
-                "created_at": datetime.utcnow()  # Store the timestamp of the entry
-            })
+            try:
+                # Save the skincare data into the MongoDB collection
+                result = mongo.db.skincare_entries.insert_one({
+                    "username": username,
+                    "skincare_step": selected_skin_type,
+                    "product_name": product_name,
+                    "time_of_day": time_of_day,
+                    "created_at": datetime.utcnow()  # Store the timestamp of the entry
+                })
+                print(f"Entry inserted with ID: {result.inserted_id}")  # Debugging
+                flash("Skincare entry saved successfully!", "success")
+            except Exception as e:
+                print(f"Error inserting skincare entry: {e}")
+                flash("An error occurred while saving your skincare entry.", "error")
 
-            flash("Skincare entry saved successfully!", "success")
             return redirect(url_for('profile'))
         else:
             flash("Please log in to save your skincare entry.", "error")
@@ -196,6 +250,35 @@ def delete_entry(entry_id):
         flash("You need to be logged in to delete an entry.", "error")
 
     return redirect(url_for('profile_routine'))
+
+
+@app.route('/add_routine', methods=["POST"])
+def add_routine():
+    if "user" in session:
+        username = session["user"]
+
+        routine = [
+            {
+                "step_name": request.form.get("step_name1"),
+                "product_used": request.form.get("product_used1"),
+                "time_of_day": request.form.get("time_of_day1"),
+            },
+            {
+                "step_name": request.form.get("step_name2"),
+                "product_used": request.form.get("product_used2"),
+                "time_of_day": request.form.get("time_of_day2"),
+            }
+        ]
+        # Store the routine in the database
+        mongo.db.routines.insert_one({
+            "username": username,
+            "routine": routine
+        })
+        flash("Routine added successfully!")
+        return redirect(url_for('profile'))
+    else:
+        flash("Please log in to add a routine.")
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
