@@ -44,20 +44,16 @@ def home():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        # check if username exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+        # Check if username exists in db
+        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
 
         if existing_user:
-            # ensure hashed password matches user input
-            if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
+            # Ensure hashed password matches user input
+            if check_password_hash(existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
 
                 # Retrieve skin type from the database and store it in the session
-                user_skintype = mongo.db.user_skintype.find_one(
-                    {"username": session["user"]}
-                )
+                user_skintype = mongo.db.user_skintype.find_one({"username": session["user"]})
                 if user_skintype:
                     session["user_skintype"] = user_skintype.get("skin_type")
                     print("Skin type retrieved:", session["user_skintype"])  # Debugging
@@ -65,15 +61,14 @@ def login():
                 flash("Welcome, {}".format(request.form.get("username")))
                 return redirect(url_for("profile_skintype"))
             else:
-                # invalid password match
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
         else:
-            # username doesn't exist
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
 
     if request.method == "POST":
         # check if username exists in db
@@ -135,7 +130,6 @@ def jls_extract_def():
 @app.route('/profile_skintype', methods=["GET", "POST"])
 def profile_skintype():
     if request.method == "POST":
-
         selected_skin_type = request.form.get('group1')
 
         # Check if the user is logged in
@@ -143,6 +137,7 @@ def profile_skintype():
             username = session["user"]
 
             try:
+                # Update the user's skin type in the database
                 mongo.db.user_skintype.update_one(
                     {"username": username},
                     {"$set": {"skin_type": selected_skin_type}},
@@ -186,7 +181,6 @@ def edit_entry(entry_id):
     # If GET request, render the edit form with existing data
     entry = mongo.db.skincare_entries.find_one({"_id": ObjectId(entry_id)})
     return render_template("edit_entry.html", entry=entry)
-
 
 
 # Profile page where users can add entries 
@@ -301,6 +295,49 @@ def add_routine():
     else:
         flash("Please log in to add a routine.")
         return redirect(url_for('login'))
+
+
+@app.route('/product_recommendations')
+def product_recommendations():
+    # Check if the user is logged in and has a skin type set
+    if 'user_skintype' in session:
+        skin_type = session['user_skintype']
+        
+        # Example product data based on skin type
+        products = []
+
+        if skin_type == 'Oily':
+            products = [
+                {"name": "Oil-Free Moisturizer", "description": "Keeps skin hydrated without excess oil.", "price": 25.99},
+                {"name": "Mattifying Primer", "description": "Controls shine and minimizes pores.", "price": 20.99 },
+                {"name": "Salicylic Acid Serum", "description": "Reduces breakouts and controls oil.", "price": 30.00 }
+            ]
+        elif skin_type == 'Dry':
+            products = [
+                {"name": "Hydrating Cream", "description": "Deeply nourishes and moisturizes dry skin.", "price": 35.99, "link": "#"},
+                {"name": "Moisture-Rich Cleanser", "description": "Cleanses without stripping moisture.", "price": 18.99, "link": "#"},
+                {"name": "Hyaluronic Acid Serum", "description": "Boosts hydration and plumps skin.", "price": 29.99, "link": "#"}
+            ]
+        elif skin_type == 'Combination':
+            products = [
+                {"name": "Balancing Moisturizer", "description": "Balances oily and dry areas.", "price": 27.99},
+                {"name": "Gentle Exfoliating Toner", "description": "Exfoliates without over-drying.", "price": 22.50},
+                {"name": "Lightweight Hydration Gel", "description": "Hydrates without adding oil.", "price": 28.99}
+            ]
+        elif skin_type == 'Sensitive':
+            products = [
+                {"name": "Soothing Moisturizer", "description": "Calms and hydrates sensitive skin.", "price": 24.99},
+                {"name": "Fragrance-Free Cleanser", "description": "Gently cleanses without irritation.", "price": 19.99},
+                {"name": "Aloe Vera Gel", "description": "Soothes and cools sensitive skin.", "price": 15.00}
+            ]
+
+        # Render the product recommendations page with the products
+        return render_template("product_recommendations.html", products=products)
+    
+    else:
+        # If the user's skin type is not set, redirect them to set it first
+        flash("Please set your skin type to get product recommendations.")
+        return redirect(url_for('profile_skintype'))
 
 
 if __name__ == "__main__":

@@ -42,7 +42,7 @@
             <div id="skinTypeMessage">
                 <h5>Your skin type is: {{ session['user_skintype'] if 'user_skintype' in session else 'Not set' }}
                     <a class="btn-small waves-effect waves-light modal-trigger pink darken-2 " href="#changeSkinTypeModal">
-                        <i class="material-icons">update skin type</i> 
+                        <i class="material-icons">edit</i> 
                     </a>
                 </h5>
             </div>
@@ -84,6 +84,7 @@
                     </form>
                 </div>
             </div>
+
             <!-- Display Skincare Entries -->
             <h6>Skincare Routine</h6>
             <ul class="collection">
@@ -169,6 +170,9 @@
                                     <button class="btn waves-effect waves-light pink darken-2" type="submit" id="saveEntryButton">Save Entry</button>
                                 </div>
                             </form>
+                            <div class="center-align">
+                                <a href="{{ url_for('product_recommendations') }}" class="pink-text text-darken-2">Not sure what products to use?</a>
+                            </div>
                         </div>
                     </div>
                 </div>
