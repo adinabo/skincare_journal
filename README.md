@@ -1,26 +1,31 @@
-# Skincare Routine Tracker
+# Skincare Journal
 
-A Skincare Routine Tracker is a straightforward app designed to help users manage their skincare routines. 
+A Skincare Journal is a straightforward app designed to help users manage their skincare routines. 
 
-As a skincare enthusiast, I've observed that many people are unsure about which products to use, the optimal timing for their application, and which products should not be combined. By developing this simple tracker, users can log their skincare products into the app, which will help them keep track of their skincare routine.
+As a skincare enthusiast, I've noticed that it can be challenging to keep track of all the products in my routine, especially when some are used only a few times a week, while others are designated for specific times like morning or evening.
+
+Initially, I had the idea of creating an app that would leverage APIs to do more than just help users track their skincare routines. My goal was to design a platform that could also offer personalized product recommendations and direct users to purchase the products they need. 
+The inspiration for this project came from my passion for skincare, and I saw this as an opportunity to build something that could genuinely enhance the skincare experience for others. I wanted to combine technology with my interest in skincare to create a tool that would be both practical and enjoyable for users. 
+
+However, I encountered challenges in finding APIs that would be suitable for my app, and that is how I decided to develop a Skincare Journal instead, leaving the door open for my initial idea. 
 
 ![Responsiveness]()
 
 ## Rationale and Purpose
 
 ### Why a Skincare Routine Tracker?
-Maintaining a consistent and effective skincare routine can be challenging, especially for those new to skincare or looking to optimize their regimen. Understanding which products to use, when to apply them, and which combinations to avoid is crucial for achieving the best results and avoiding adverse reactions. As a passionate skincare enthusiast, I recognized a gap in accessible tools that could guide users through this process.
+Maintaining a consistent and effective skincare routine can be challenging, especially for those new to skincare or looking to optimize their regimen. I recognized a gap in accessible tools that could guide users through this process.
 
 ### The Problem:
-1. Product Confusion: With a plethora of skincare products available, it can be overwhelming to determine what each product does and when it should be used in a routine.
+1. Product Confusion: With a plethora of skincare products available, it can be overwhelming to remember what products to use.
 
 2. Timing and Order: The effectiveness of skincare products can depend significantly on the order of application and the time of day they are used.
 
 3. Product Incompatibility: Certain skincare ingredients should not be mixed due to potential adverse reactions or reduced efficacy.
+
 ### The Solution:
 
 The Skincare Routine Tracker is a simple app designed to assist users in managing their skincare routines. By allowing users to log their skincare products, the app helps them keep track of the products used.
-
 
 **Target audience:**
 
@@ -81,6 +86,19 @@ The website was successfully deployed to GitHub. Steps to deploy it:
 The live site can be found at the following link: https:/
 
 ## Bugs
+
+1. Users Unable to Log Back In After Logging Out
+
+A significant issue encountered during development is that users are unable to log back into the application after they have logged out. Once a user logs out, attempting to log in again with the same credentials results in a failure, requiring the user to create a new account to regain access.
+The problem stems from how the session is managed and how user authentication is handled. When a user logs out, the session is cleared, which is expected behavior. However, upon logging back in, the system does not correctly retrieve or validate the user's credentials from the database. 
+
+This bug significantly impacts the user experience, as it effectively locks users out of their accounts once they log out. Resolving this issue is critical to ensure that users can seamlessly log in and out of the application as needed.
+
+2. Skin Type Only Temporarily Saved in the Database
+Another major issue discovered during development is that a user's selected skin type is only temporarily saved in the database. After restarting the server, the skin type appears to be deleted or lost, and the user needs to update their skin type again.
+
+This bug also significantly affects the user experience by causing frustration and confusion. Users may believe their preferences are saved, only to find them missing later. Fixing this issue is crucial to ensuring that users can reliably set and maintain their skin type preferences across sessions.
+
 ## UX Scope Testing
 
 
@@ -103,7 +121,6 @@ User Experience: Manual testing is essential for evaluating the game's user inte
 
 Exploratory Testing: Manual testers can actively explore the game to uncover unexpected behavior and bugs.
 
-**Game Reset Test:**
 
 **Device Compatibility Test:**
 
