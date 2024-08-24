@@ -23,7 +23,9 @@
             <a href="#" class="brand-logo"><h5>{{ session['user'] }}</h5></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('profile_routine') }}">Routine</a></li>
+                <li><a href="{{ url_for('profile_routine') }}">Journal</a></li>
+                <li><a href="{{ url_for('profile') }}">Add entry</a></li>
+                <li><a href="{{ url_for('product_recommendations') }}">Products</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             </ul>
         </div>
@@ -34,7 +36,6 @@
         <li><a href="{{ url_for('profile_routine') }}">Routine</a></li>
         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
     </ul>
-
     <!-- Main Content -->
     <section class="section center-align">
         <div class="container">
@@ -90,39 +91,7 @@
             <ul class="collection">
                 {% for entry in entries %}
                 <li class="collection-item">
-                    <strong>Step:</strong> {{ entry.skincare_step }} <br>@app.route('/profile_skintype', methods=["GET", "POST"])
-                    def profile_skintype():
-                        if request.method == "POST":
-                            # Get the selected skin type from the form
-                            selected_skin_type = request.form.get('group1')
-                    
-                            # Check if the user is logged in
-                            if "user" in session:
-                                username = session["user"]
-                    
-                                # Update the user's skin type in the database
-                                try:
-                                    mongo.db.user_skintype.update_one(
-                                        {"username": username},
-                                        {"$set": {"skin_type": selected_skin_type}},
-                                        upsert=True
-                                    )
-                                    
-                                    # Update the session variable to reflect the new skin type
-                                    session["user_skintype"] = selected_skin_type
-                    
-                                    flash("Skin type updated successfully!")
-                                except Exception as e:
-                                    print(f"Error updating skin type: {e}")
-                                    flash("An error occurred while updating your skin type.")
-                                
-                                return redirect(url_for('profile'))
-                            else:
-                                flash("Please log in to update your skin type.")
-                                return redirect(url_for('login'))
-                    
-                        return render_template("profile_skintype.html")
-                    
+                    <strong>Step:</strong> {{ entry.skincare_step }} <br>
                     <strong>Product:</strong> {{ entry.product_name }} <br>
                     <strong>Time of Day:</strong> {{ entry.time_of_day }} <br>
                     {% if entry.created_at %}
