@@ -181,12 +181,6 @@ def profile():
         product_name = request.form.get('product_name')
         time_of_day = request.form.get('time_of_day')
 
-        # Debugging: Print the form data to check what is being received
-        print("Form Data Received:")
-        print("Skincare Step:", selected_skin_type)
-        print("Product Name:", product_name)
-        print("Time of Day:", time_of_day)
-
         # Check if the user is logged in
         if "user" in session:
             username = session["user"]
@@ -201,7 +195,6 @@ def profile():
                     "time_of_day": time_of_day,
                     "created_at": datetime.utcnow()  # Store the timestamp of the entry
                 })
-                print(f"Entry inserted with ID: {result.inserted_id}")  # Debugging
                 flash("Skincare entry saved successfully!", "success")
             except Exception as e:
                 print(f"Error inserting skincare entry: {e}")
@@ -212,7 +205,14 @@ def profile():
             flash("Please log in to save your skincare entry.", "error")
             return redirect(url_for('login'))
 
-    return render_template("profile.html")
+    else:
+        # If it's a GET request, fetch products based on the skincare step
+        skincare_steps = ["cleanser", "moisturizer", "serum", "acid"]
+        products = {}
+        for step in skincare_steps:
+            products[step] = list(mongo.db.products.find({"type": step}).limit(5))
+
+    return render_template("profile.html", products=products)
 
 
 @app.route('/profile_routine', methods=["GET", "POST"])

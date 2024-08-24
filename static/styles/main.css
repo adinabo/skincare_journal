@@ -11213,3 +11213,19 @@ body,
 .input-field input[type="radio"] {
   margin-right: 10px;
 }
+/****************************************************************Product Recommendation****/
+.my-card-class.custom-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.my-card-class .card-title-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.my-card-class .full-width-btn {
+  width: 100%;
+}
+
