@@ -165,6 +165,28 @@ def profile_skintype():
     return render_template("profile_skintype.html")
 
 
+@app.route('/edit_entry/<entry_id>', methods=["GET", "POST"])
+def edit_entry(entry_id):
+    if request.method == "POST":
+        # Handle the form submission to update the entry
+        updated_data = {
+            "skincare_step": request.form.get("skincare_step"),
+            "product_name": request.form.get("product_name"),
+            "time_of_day": request.form.get("time_of_day"),
+            "updated_at": datetime.utcnow()
+        }
+        # Update the entry in the database
+        mongo.db.skincare_entries.update_one(
+            {"_id": ObjectId(entry_id)},
+            {"$set": updated_data}
+        )
+        flash("Skincare entry updated successfully!")
+        return redirect(url_for('profile_routine'))
+
+    # If GET request, render the edit form with existing data
+    entry = mongo.db.skincare_entries.find_one({"_id": ObjectId(entry_id)})
+    return render_template("edit_entry.html", entry=entry)
+
 
 
 # Profile page where users can add entries 
