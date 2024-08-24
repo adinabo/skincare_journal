@@ -44,53 +44,36 @@ def home():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        username = request.form.get("username").lower()
+        print(f"Attempting login for user: {username}")
+
         # Check if username exists in db
-        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
+        existing_user = mongo.db.users.find_one({"username": username})
 
         if existing_user:
+            print("User found in database")
+
+            # Debugging: Check password hash stored in database
+            print(f"Stored hash: {existing_user['password']}")
+
             # Ensure hashed password matches user input
             if check_password_hash(existing_user["password"], request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
+                print("Password check passed")
+                session["user"] = username
 
                 # Retrieve skin type from the database and store it in the session
                 user_skintype = mongo.db.user_skintype.find_one({"username": session["user"]})
                 if user_skintype:
                     session["user_skintype"] = user_skintype.get("skin_type")
-                    print("Skin type retrieved:", session["user_skintype"])  # Debugging
 
-                flash("Welcome, {}".format(request.form.get("username")))
+                flash("Welcome, {}".format(username))
                 return redirect(url_for("profile_skintype"))
             else:
+                print("Password check failed")
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
         else:
-            flash("Incorrect Username and/or Password")
-            return redirect(url_for("login"))
-
-    return render_template("login.html")
-
-
-    if request.method == "POST":
-        # check if username exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-
-        if existing_user:
-            # ensure hashed password matches user input
-            if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        flash("Welcome, {}".format(
-                            request.form.get("username")))
-                        return redirect(url_for(
-                            "profile_skintype", username=session["user"]))
-            else:
-                # invalid password match
-                flash("Incorrect Username and/or Password")
-                return redirect(url_for("login"))
-
-        else:
-            # username doesn't exist
+            print("User not found in database")
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
@@ -100,22 +83,28 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        # check if username already exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()}) 
+        username = request.form.get("username").lower()
+        password = request.form.get("password")
+        
+        # Check if username already exists in db
+        existing_user = mongo.db.users.find_one({"username": username}) 
 
         if existing_user:
             flash("Username already exists")
             return redirect(url_for("register"))
 
+        # Hash the password
+        hashed_password = generate_password_hash(password)
+        print(f"Registering user: {username} with hashed password: {hashed_password}")
+
         register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "username": username,
+            "password": hashed_password
         }
         mongo.db.users.insert_one(register)
 
-        # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
+        # Put the new user into 'session' cookie
+        session["user"] = username
         flash("Registration Successful!")
         return redirect(url_for("profile_skintype", username=session["user"]))
 
