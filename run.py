@@ -288,8 +288,8 @@ def add_routine():
         return redirect(url_for('login'))
 
 
-@app.route('/product_recommendations')
-def product_recommendations():
+@app.route('/products')
+def products():
     # Check if the user is logged in and has a skin type set
     if 'user_skintype' in session:
         skin_type = session['user_skintype']
@@ -298,7 +298,7 @@ def product_recommendations():
         products = list(mongo.db.products.find({"skin_type": skin_type}))
 
         # Render the product recommendations page with the products
-        return render_template("product_recommendations.html", products=products)
+        return render_template("products.html", products=products)
     
     else:
         # If the user's skin type is not set, redirect them to set it first

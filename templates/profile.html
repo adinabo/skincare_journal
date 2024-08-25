@@ -25,7 +25,7 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('profile_routine') }}">Journal</a></li>
                 <li><a href="{{ url_for('profile') }}">Add entry</a></li>
-                <li><a href="{{ url_for('product_recommendations') }}">Products</a></li>
+                <li><a href="{{ url_for('products') }}">Products</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             </ul>
         </div>
@@ -85,7 +85,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <!-- Display Skincare Entries -->
             <h6>Skincare Routine</h6>
             <ul class="collection">
@@ -116,7 +116,7 @@
                                 <option value="cleanser">Cleanser</option>
                                 <option value="moisturizer">Moisturizer</option>
                                 <option value="serum">Serum</option>
-                                <option value="acid">Acid</option>
+                                <option value="acid">Peeling</option>
                             </select>
                             <label>Skincare Step</label>
                         </div>
@@ -147,7 +147,7 @@
                         </div>
                     </form>
                     <div class="center-align">
-                        <a href="{{ url_for('product_recommendations') }}" class="pink-text text-darken-2">Not sure what products to use?</a>
+                        <a href="{{ url_for('products') }}" class="pink-text text-darken-2">Not sure what products to use?</a>
                     </div>
                 </div>
             </div>
