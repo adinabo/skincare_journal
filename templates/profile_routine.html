@@ -7,38 +7,52 @@
 <section class="section center-align">
     <div class="container">
         {% block content %}
-        <!-- Display Calendar -->
+        <!-- Display Skincare Entry History as Collapsible Cards -->
         <h6>Skincare Entry History</h6>
-        <div class="calendar row">
+        <ul class="collapsible">
             {% for date, day_entries in entries_by_date.items() %}
-            <div class="col s12 m6 l4 xl3">
-                <div class="card hoverable calendar-day">
-                    <div class="card-content">
-                        <span class="card-title">{{ date.strftime('%d %b %Y') }}</span>
-                        {% for entry in day_entries %}
-                        <p><strong>{{ entry.skincare_step }}</strong></p>
-                        <p>{{ entry.product_name }}</p>
-                        <p><em>{{ entry.time_of_day }}</em></p>
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons"></i>
+                    {{ date.strftime('%d %b %Y') }}
+                </div>
+                <div class="collapsible-body">
+                    {% for entry in day_entries %}
+                    <div class="card-panel">
+                        <p><strong>Step:</strong> {{ entry.skincare_step }}</p>
+                        <p><strong>Product:</strong> {{ entry.product_name }}</p>
+                        <p><strong>Time of Day:</strong> {{ entry.time_of_day }}</p>
+                        {% if entry.created_at %}
+                            <em>{{ entry.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</em>
+                        {% else %}
+                            <em>Timestamp not available</em>
+                        {% endif %}
                         <div class="row">
                             <form method="POST" action="{{ url_for('delete_entry', entry_id=entry._id) }}" style="display:inline;">
                                 <button type="submit" class="btn waves-effect waves-light red">
-                                    <i class="material-icons">delete</i> DELETE
+                                    <i class="material-icons">delete</i>
                                 </button>
                             </form>
 
                             <form method="GET" action="{{ url_for('edit_entry', entry_id=entry._id) }}" style="display:inline;">
                                 <button type="submit" class="btn waves-effect waves-light blue">
-                                    <i class="material-icons">edit</i> EDIT
+                                    <i class="material-icons">edit</i>
                                 </button>
                             </form>
                         </div>
-                        <hr>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
-            </div>
+            </li>
             {% endfor %}
-        </div>
+        </ul>
         {% endblock %}
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+});
+</script>
