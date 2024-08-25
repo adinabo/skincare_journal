@@ -61,10 +61,12 @@ def login():
                 print("Password check passed")
                 session["user"] = username
 
-                # Retrieve skin type from the database and store it in the session
+                # Retrieve and store user skin type in the session
                 user_skintype = mongo.db.user_skintype.find_one({"username": session["user"]})
                 if user_skintype:
                     session["user_skintype"] = user_skintype.get("skin_type")
+                else:
+                    session["user_skintype"] = None  # Handle case where no skin type is set
 
                 flash("Welcome, {}".format(username))
                 return redirect(url_for("profile_skintype"))
@@ -292,33 +294,8 @@ def product_recommendations():
     if 'user_skintype' in session:
         skin_type = session['user_skintype']
         
-        # Example product data based on skin type
-        products = []
-
-        if skin_type == 'Oily':
-            products = [
-                {"name": "Oil-Free Moisturizer", "description": "Keeps skin hydrated without excess oil.", "price": 25.99},
-                {"name": "Mattifying Primer", "description": "Controls shine and minimizes pores.", "price": 20.99 },
-                {"name": "Salicylic Acid Serum", "description": "Reduces breakouts and controls oil.", "price": 30.00 }
-            ]
-        elif skin_type == 'Dry':
-            products = [
-                {"name": "Hydrating Cream", "description": "Deeply nourishes and moisturizes dry skin.", "price": 35.99, "link": "#"},
-                {"name": "Moisture-Rich Cleanser", "description": "Cleanses without stripping moisture.", "price": 18.99, "link": "#"},
-                {"name": "Hyaluronic Acid Serum", "description": "Boosts hydration and plumps skin.", "price": 29.99, "link": "#"}
-            ]
-        elif skin_type == 'Combination':
-            products = [
-                {"name": "Balancing Moisturizer", "description": "Balances oily and dry areas.", "price": 27.99},
-                {"name": "Gentle Exfoliating Toner", "description": "Exfoliates without over-drying.", "price": 22.50},
-                {"name": "Lightweight Hydration Gel", "description": "Hydrates without adding oil.", "price": 28.99}
-            ]
-        elif skin_type == 'Sensitive':
-            products = [
-                {"name": "Soothing Moisturizer", "description": "Calms and hydrates sensitive skin.", "price": 24.99},
-                {"name": "Fragrance-Free Cleanser", "description": "Gently cleanses without irritation.", "price": 19.99},
-                {"name": "Aloe Vera Gel", "description": "Soothes and cools sensitive skin.", "price": 15.00}
-            ]
+        # Query the database for products that match the user's skin type
+        products = list(mongo.db.products.find({"skin_type": skin_type}))
 
         # Render the product recommendations page with the products
         return render_template("product_recommendations.html", products=products)

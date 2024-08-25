@@ -49,5 +49,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var selectElems = document.querySelectorAll('select');
+    M.FormSelect.init(selectElems);
+
+    // Initialize modals
+    var modalElems = document.querySelectorAll('.modal');
+    M.Modal.init(modalElems);
+
+    var skincareStepSelect = document.getElementById('skincare_step');
+    var productNameSelect = document.getElementById('product_name');
+
+    skincareStepSelect.addEventListener('change', function() {
+        var selectedStep = skincareStepSelect.value;
+        
+        for (var i = 0; i < productNameSelect.options.length; i++) {
+            var option = productNameSelect.options[i];
+            option.style.display = option.getAttribute('data-type') === selectedStep ? '' : 'none';
+        }
+
+        // Reset the product name select
+        productNameSelect.selectedIndex = 0;
+        M.FormSelect.init(productNameSelect);
+    });
+});
 
 
