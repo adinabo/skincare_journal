@@ -120,13 +120,12 @@
                             </select>
                             <label>Skincare Step</label>
                         </div>
-
                         <div class="input-field">
                             <select name="product_name" id="product_name" required>
                                 <option value="" disabled selected>Select a product</option>
                                 {% for step, step_products in products.items() %}
                                     {% for product in step_products %}
-                                        <option value="{{ product['name'] }}" data-type="{{ step }}">{{ product['name'] }} - ${{ product['price'] }}</option>
+                                        <option value="{{ product['name'] }}" data-type="{{ step }}">{{ product['name'] }}</option>
                                     {% endfor %}
                                 {% endfor %}
                             </select>

@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from skincare_package import app, models
+from collections import defaultdict
 from datetime import datetime
 
 
@@ -208,13 +209,20 @@ def profile():
             return redirect(url_for('login'))
 
     else:
-        # If it's a GET request, fetch products based on the skincare step
-        skincare_steps = ["cleanser", "moisturizer", "serum", "acid"]
-        products = {}
-        for step in skincare_steps:
-            products[step] = list(mongo.db.products.find({"type": step}).limit(5))
+        # Fetch products based on the user's skin type and skincare step
+        user_skin_type = session.get("user_skintype")
+        products_by_step = {}
 
-    return render_template("profile.html", products=products)
+        if user_skin_type:
+            skincare_steps = ["cleanser", "moisturizer", "serum", "peeling"]
+
+            for step in skincare_steps:
+                products_by_step[step] = list(mongo.db.products.find({
+                    "type": step.capitalize(),
+                    "skin_type": user_skin_type
+                }))
+
+    return render_template("profile.html", products=products_by_step)
 
 
 @app.route('/profile_routine', methods=["GET", "POST"])
@@ -223,11 +231,21 @@ def profile_routine():
         username = session["user"]
         # Retrieve all skincare entries for the logged-in user
         entries = list(mongo.db.skincare_entries.find({"username": username}))
-    else:
-        # If the user is not logged in, initialize entries as an empty list
-        entries = []
 
-    return render_template("profile_routine.html", entries=entries)
+        # Group entries by date (only date part, ignore time)
+        entries_by_date = defaultdict(list)
+        for entry in entries:
+            entry_date = entry['created_at'].date()  # Get the date part
+            entries_by_date[entry_date].append(entry)
+
+        # Sort entries by date
+        entries_by_date = dict(sorted(entries_by_date.items(), reverse=True))
+
+    else:
+        # If the user is not logged in, initialize entries_by_date as an empty dict
+        entries_by_date = {}
+
+    return render_template("profile_routine.html", entries_by_date=entries_by_date)
 
 
 @app.route('/logout')
