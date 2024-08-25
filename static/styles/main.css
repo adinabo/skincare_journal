@@ -11214,18 +11214,38 @@ body,
   margin-right: 10px;
 }
 /****************************************************************Product Recommendation****/
-.my-card-class.custom-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.my-card-class .card-title-truncate {
-  white-space: nowrap;
+.card-title.product_text {
+  white-space: normal;
+  font-size: 0.8em !important; /* Added !important to override any other styles */
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  line-height: 0.5em;
+  height: 4.4em; /* Line height times the number of lines */
 }
-.my-card-class .full-width-btn {
+
+.card-content p.product_text {
+  font-size: 0.8em !important; /* Added !important to override any other styles */
+}
+
+.custom-card {
+  min-height: 220px; /* You can adjust this as needed */
+}
+
+.full-width-btn {
   width: 100%;
 }
+
+.my-card-class {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+
 

@@ -37,10 +37,12 @@ Individuals, particularly women, who are passionate about maintaining and optimi
 ## UX Design Process
 
 ### Wireframes and Mock-ups 
-![Inital wireframes]()
+In the initial stages of development, wireframes were created using Figma to visualize the app’s layout and user flow. These wireframes served as a blueprint for the design, ensuring that the user interface was both intuitive and aesthetically pleasing.
+However, I found myself changing the wireframes heavily during the development process, as I did not have a defined idea of what I wanted to achieve in terms of database.
 
 ### Design Decisions and Reasoning
 
+The design of the Skincare Journal was guided by the principles of simplicity and user-friendliness. Each element, from the navigation to the logging forms, was designed to be straightforward and easy to use. The goal was to create an app that users could quickly integrate into their daily skincare routine without unnecessary complexity.
 
 ## Features
 
