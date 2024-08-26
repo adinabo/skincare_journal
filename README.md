@@ -33,11 +33,6 @@ Sure, the UI can be improved, but I believe the base is there, it just needs som
 
 ![Responsiveness]()
 
-## Rationale and Purpose
-
-### Why a Skincare Routine Tracker?
-Maintaining a consistent and effective skincare routine can be challenging, especially for those new to skincare or looking to optimize their regimen. I recognized a gap in accessible tools that could guide users through this process.
-
 ### The Problem:
 1. Product Confusion: With a plethora of skincare products available, it can be overwhelming to remember what products to use.
 
@@ -45,9 +40,6 @@ Maintaining a consistent and effective skincare routine can be challenging, espe
 
 3. Product Incompatibility: Certain skincare ingredients should not be mixed due to potential adverse reactions or reduced efficacy.
 
-### The Solution:
-
-The Skincare Routine Tracker is a simple app designed to assist users in managing their skincare routines. By allowing users to log their skincare products, the app helps them keep track of the products used.
 
 **Target audience:**
 
@@ -72,6 +64,31 @@ The design of the Skincare Journal was guided by the principles of simplicity an
 **Personalized Routine Generation:** Based on the logged products, the app creates customized products reccomendations tailored to the user's specific skin type. 
 **Skincare Journal:** The app saves the user entries according to the date. A calendar might be used in the future.
 
+# MongoDB Database Structure and Data Model
+
+The application utilizes a MongoDB database to effectively manage and store various types of data essential for delivering a personalized skincare experience to its users. The database is named Skincare_db and consists of the following collections:
+
+1. products
+
+The products collection stores information about various skincare products, including their names, types (e.g., cleanser, moisturizer, serum or peeling), skin type suitability (e.g., oily, dry, combination, sensitive), and ingredients.
+This data model allows the application to offer personalized product recommendations based on the user’s skin type, making it a critical component for achieving the app's goal of providing tailored skincare advice.
+This collection is essential for populating the product recommendations displayed to users. By associating each product with a specific skin type, the application can filter and suggest only those products that are most suitable for the user's skin, thus enhancing the user experience and increasing the relevance of the recommendations.
+
+2. skincare_entries
+
+The skincare_entries collection logs individual skincare routine entries made by users. Each document includes the user's name, the skincare step (e.g., cleanser, serum etc), the product used, the time of day (morning or evening), and the date and time when the entry was created.
+
+This collection is fundamental for tracking and managing the user's skincare routine. By storing each entry separately, the app allows users to monitor their skincare habits over time, see patterns in product usage, and make informed decisions about their routine. It also supports features like viewing, editing(by deleting and adding a new entry), and deleting past entries, providing users with comprehensive control over their skincare regimen.
+
+3. user_skintype
+The user_skintype collection holds information about each user’s skin type. Each document is associated with a specific user and records their chosen skin type (e.g., oily, dry, combination, sensitive).
+
+This collection is crucial for delivering personalized recommendations on the Products page, but also when the user is adding a new entry. By storing the user’s skin type, the app can customize the product suggestions it provides, ensuring that users receive the most appropriate advice for their unique skin needs. This personalization is a key feature of the app, making the user experience more relevant and effective.
+
+4. users
+
+Each collection is designed to serve a specific purpose within the application, and together, they form a cohesive data model that aligns with the core functionality of the project.
+
 
 ## Technologies Used
 
@@ -79,7 +96,7 @@ The design of the Skincare Journal was guided by the principles of simplicity an
 - CSS
 - Python
 - Flask
-- Mongo Atlas and Compass
+- Mongo Atlas and Compass 
 - Figma 
 - Git and Github for version control
 - Visual Studio Code
