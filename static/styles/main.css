@@ -11215,35 +11215,60 @@ body,
 }
 /****************************************************************Product Recommendation****/
 .card-title.product_text {
+  font-size: 0.9em !important; /
   white-space: normal;
-  font-size: 0.8em !important; /* Added !important to override any other styles */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* Number of lines to display */
+  -webkit-line-clamp: 5; 
   -webkit-box-orient: vertical;
-  line-height: 0.5em;
-  height: 4.4em; /* Line height times the number of lines */
+  line-height: 1.5em !important;
 }
 
 .card-content p.product_text {
-  font-size: 0.8em !important; /* Added !important to override any other styles */
+  font-size: 0.5em; 
 }
 
 .custom-card {
-  min-height: 220px; /* You can adjust this as needed */
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 5px;
 }
 
 .full-width-btn {
   width: 100%;
+  padding: 10px;
 }
 
-.my-card-class {
-  height: auto;
+.row {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-between; 
 }
+
+.row .col.s12 {
+  margin-bottom: 7px; 
+}
+
+/* ingredients modal */
+.small-modal {
+  max-width: 30%; 
+  padding: 10px; 
+}
+
+.small-modal .modal-content {
+  padding: 10px; 
+}
+
+.small-modal .modal-footer {
+  padding: 10px; 
+  text-align: right; 
+}
+
+
+
 
 
 

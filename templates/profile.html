@@ -52,13 +52,13 @@
         <div class="container">
             {% block content %}
             <div id="skinTypeMessage">
+                <h5>Please update your skin type </h5>
                 <h5>Your skin type is: {{ session['user_skintype'] if 'user_skintype' in session else 'Not set' }}
                     <a class="btn-small waves-effect waves-light modal-trigger pink darken-2 " href="#changeSkinTypeModal">
                         <i class="material-icons">edit</i> 
                     </a>
                 </h5>
             </div>
-
             <!-- Modal Structure -->
             <div id="changeSkinTypeModal" class="modal">
                 <div class="modal-content">
@@ -98,7 +98,6 @@
             </div>
 
             <!-- Display Skincare Entries -->
-            <h6>Skincare Routine</h6>
             <ul class="collection">
                 {% for entry in entries %}
                 <li class="collection-item">
