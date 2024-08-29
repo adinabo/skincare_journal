@@ -189,23 +189,31 @@ Google Lighthouse: The app's performance, accessibility, and best practices were
 
 - WS3 HTML Testing Validator
 
+After testing the HTML code with W3C Validator, there were no errors found.
+
 [W3C Validator](https://validator.w3.org/)
-![HTML testing result](static/images/w3.jpg)
+<img src="static/images/w3.jpg" alt="HTML testing result" width="400">
 
 - CSS 
+After testing the CSS code with Jigsaw Validator, there were no errors found.
 
 [CSS Validator](https://validator.w3.org/)
-![CSS testing result](static/images/css.jpg)
 
-- 
+<img src="static/images/css.jpg" alt="CSS testing result" width="400">
 
-[CSS testing result](https://www.jslint.com/)
-![JavaScript testing result](/assets/images/)
+- JavaScript
 
-- Google Lighthouse
+Testing with JSLint has returned 1 warning, but is not actually a synthax error.
 
-![Google Lighthouse desktop performance](/assets/images/)
-![Google Lighthouse mobile performance](/assets/images/)
+[Javascript testing result](https://www.jslint.com/)
+
+<img src="static/images/js.jpg" alt="Javascript testing result" width="400">
+
+- Python Linter
+
+<img src="static/images/pythontest.jpg" alt="Python Linter test results" width="400">
+
+[Python Linter testing results](https://pep8ci.herokuapp.com/#)
 
 ## User Stories
 
