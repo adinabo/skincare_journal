@@ -10979,7 +10979,7 @@ body {
   padding: 0.9rem 0;
 }
 #mainNav .navbar-nav .nav-item:hover {
-  color: fade(#fff, 80%);
+  color: rgba(255, 255, 255, 0.8);
   outline: none;
   background-color: transparent;
 }
@@ -11215,7 +11215,7 @@ body,
 }
 /****************************************************************Product Recommendation****/
 .card-title.product_text {
-  font-size: 0.9em !important; /
+  font-size: 0.9em !important; 
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;

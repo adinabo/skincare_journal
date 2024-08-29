@@ -1,9 +1,8 @@
 // Navbar shrink function
 function navbarShrink() {
     const navbarCollapsible = document.querySelector('.nav-wrapper');
-    if (!navbarCollapsible) {
-        return;
-    }
+    if (!navbarCollapsible) return;
+
     if (window.scrollY === 0) {
         navbarCollapsible.classList.remove('navbar-shrink');
     } else {
@@ -14,7 +13,7 @@ function navbarShrink() {
 // Form Submission Handler
 function handleFormSubmit(formId, fetchUrl, redirectUrl, messageId) {
     document.getElementById(formId).addEventListener('submit', function(event) {
-        event.preventDefault();  // Prevent the default form submission
+        event.preventDefault(); // Prevent the default form submission
 
         const formData = new FormData(this);
 
@@ -38,6 +37,7 @@ function handleFormSubmit(formId, fetchUrl, redirectUrl, messageId) {
     });
 }
 
+// Consolidated DOMContentLoaded Event Listener
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Sidenav
     var sidenavElems = document.querySelectorAll('.sidenav');
@@ -47,62 +47,32 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectElems = document.querySelectorAll('select');
     M.FormSelect.init(selectElems);
 
-});
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var selectElems = document.querySelectorAll('select');
-    M.FormSelect.init(selectElems);
-
-    // Initialize modals
+    // Initialize Modals
     var modalElems = document.querySelectorAll('.modal');
     M.Modal.init(modalElems);
 
-    var skincareStepSelect = document.getElementById('skincare_step');
-    var productNameSelect = document.getElementById('product_name');
-
-    skincareStepSelect.addEventListener('change', function() {
-        var selectedStep = skincareStepSelect.value;
-        
-        for (var i = 0; i < productNameSelect.options.length; i++) {
-            var option = productNameSelect.options[i];
-            option.style.display = option.getAttribute('data-type') === selectedStep ? '' : 'none';
-        }
-
-        // Reset the product name select
-        productNameSelect.selectedIndex = 0;
-        M.FormSelect.init(productNameSelect);
-    });
-});
-
-//Profile page entry form products list
-document.addEventListener('DOMContentLoaded', function() {
-    var selectElems = document.querySelectorAll('select');
-    M.FormSelect.init(selectElems);
-
-    var skincareStepSelect = document.getElementById('skincare_step');
-    var productNameSelect = document.getElementById('product_name');
-
-    skincareStepSelect.addEventListener('change', function() {
-        var selectedStep = skincareStepSelect.value;
-        
-        for (var i = 0; i < productNameSelect.options.length; i++) {
-            var option = productNameSelect.options[i];
-            option.style.display = option.getAttribute('data-type') === selectedStep ? '' : 'none';
-        }
-
-        // Reset the product name select
-        productNameSelect.selectedIndex = 0;
-        M.FormSelect.init(productNameSelect);
-    });
-});
-
-// collapsible
-document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Collapsible
     var collapsibleElems = document.querySelectorAll('.collapsible');
     M.Collapsible.init(collapsibleElems, {
         accordion: false
     });
+
+    // Profile Page: Filter Products Based on Skincare Step
+    var skincareStepSelect = document.getElementById('skincare_step');
+    var productNameSelect = document.getElementById('product_name');
+
+    if (skincareStepSelect && productNameSelect) {
+        skincareStepSelect.addEventListener('change', function() {
+            var selectedStep = skincareStepSelect.value;
+
+            for (var i = 0; i < productNameSelect.options.length; i++) {
+                var option = productNameSelect.options[i];
+                option.style.display = option.getAttribute('data-type') === selectedStep ? '' : 'none';
+            }
+
+            // Reset the product name select
+            productNameSelect.selectedIndex = 0;
+            M.FormSelect.init(productNameSelect);
+        });
+    }
 });
-
-
-

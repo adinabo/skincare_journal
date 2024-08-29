@@ -132,7 +132,7 @@ To install the game locally, follow these steps:
 
 1. Clone the repository using the following command:
 
-git clone https://
+git clone https:// https://github.com/adinabo/skincare_journal
 
 2. Open the project folder and open home.html in your preferred browser.
 
@@ -148,7 +148,7 @@ The website was successfully deployed to GitHub. Steps to deploy it:
 
 4. The page will automatically refresh, showing a detailed ribbon display confirming the deployment.
 
-The live site can be found at the following link: https:/
+The live site can be found at the following link: https:/ ####################
 
 ## Bugs
 
@@ -190,15 +190,14 @@ Google Lighthouse: The app's performance, accessibility, and best practices were
 - WS3 HTML Testing Validator
 
 [W3C Validator](https://validator.w3.org/)
-![HTML testing result](/assets/images/)
+![HTML testing result](static/images/w3.jpg)
 
 - CSS 
 
 [CSS Validator](https://validator.w3.org/)
-![CSS testing result](/assets/images/)
+![CSS testing result](static/images/css.jpg)
 
 - 
-
 
 [CSS testing result](https://www.jslint.com/)
 ![JavaScript testing result](/assets/images/)
