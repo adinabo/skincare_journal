@@ -31,7 +31,7 @@ Informed Recommendations: The app is designed to help users avoid product incomp
 
 Sure, the UI can be improved, but I believe the base is there, it just needs some more features, which I'm going to talk about later on.
 
-![Responsiveness]()
+![Responsive Design Preview](static/images/responsive1.jpg)
 
 ### The Problem:
 1. Product Confusion: With a plethora of skincare products available, it can be overwhelming to remember what products to use.
@@ -47,7 +47,6 @@ Individuals, particularly women, who are passionate about maintaining and optimi
 
 **Real-World Application:**
 
-
 ## UX Design Process
 
 ### Wireframes and Mock-ups 
@@ -60,9 +59,29 @@ The design of the Skincare Journal was guided by the principles of simplicity an
 
 ## Features
 
-**Product Logging:** Users can create a profile, log in and input and store information about their skincare products, such as: the product used, what type of product is it, and when do they use it.
-**Personalized Routine Generation:** Based on the logged products, the app creates customized products reccomendations tailored to the user's specific skin type. 
-**Skincare Journal:** The app saves the user entries according to the date. A calendar might be used in the future.
+ Based on the logged products, the app creates customized products reccomendations tailored to the user's specific skin type. 
+The app saves the user entries according to the date. A calendar might be used in the future.
+
+**Product Logging:** 
+Upon accessing the website, users have the option to log in or register with a username and password of their choice. After successfully logging in or registering, they are prompted to select their skin type from four available options.
+
+To add a new skincare entry, users can choose the type of product (such as a cleanser, serum, moisturizer, or peeling/exfoliator), select a specific product from a list of recommendations tailored to their skin type, specify the time of day, and save the entry.
+<img src="static/images/skintype.jpg" alt="Skintype page preview" width="400">
+<img src="static/images/selectproduct.jpg" alt="Select products Preview" width="400">
+
+**Skincare Journal:** 
+Once saved, users can view their skincare history on the Journal page, where they have the ability to view, update, and delete their entries.
+
+Currently, the app includes a limited number of products, but given the vast selection available on the market, I am considering the potential of integrating an API to expand the product database.(haven not found suitable ones yet but working on it)
+
+<img src="static/images/history.jpg" alt="Journal Page Preview" width="400">
+
+**Personalized Routine Generation:**
+
+After selecting their skin type, users will receive personalized product suggestions on the Products page, where the recommended products will be displayed. They can also view the ingredients of each product or update their skin type if it has changed over time (such as becoming sensitive or drying out during the winter, and so on)
+
+<img src="static/images/products.jpg" alt="Products Page Preview" width="400">
+
 
 # MongoDB Database Structure and Data Model
 
@@ -89,6 +108,9 @@ This collection is crucial for delivering personalized recommendations on the Pr
 
 Each collection is designed to serve a specific purpose within the application, and together, they form a cohesive data model that aligns with the core functionality of the project.
 
+<img src="static/images/dbschema.jpg" alt="Database schema" width="400">
+<img src="static/images/skincare_db.jpg" alt="Database Preview" width="280">
+<img src="static/images/skincare_collections.jpg" alt="Database Collections" width="400">
 
 ## Technologies Used
 
