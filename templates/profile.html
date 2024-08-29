@@ -52,8 +52,8 @@
         <div class="container">
             {% block content %}
             <div id="skinTypeMessage">
-                <h5>Please update your skin type </h5>
-                <h5>Your skin type is: {{ session['user_skintype'] if 'user_skintype' in session else 'Not set' }}
+                <h5 class="white-text">Please update your skin type </h5>
+                <h5 class="white-text">Your skin type is: {{ session['user_skintype'] if 'user_skintype' in session else 'Not set' }}
                     <a class="btn-small waves-effect waves-light modal-trigger pink darken-2 " href="#changeSkinTypeModal">
                         <i class="material-icons">edit</i> 
                     </a>
@@ -62,7 +62,7 @@
             <!-- Modal Structure -->
             <div id="changeSkinTypeModal" class="modal">
                 <div class="modal-content">
-                    <h4>Change Skin Type</h4>
+                    <h4 class="white-text">Update Skin Type</h4>
                     <form id="ChangeSkinTypeForm" method="POST" action="{{ url_for('profile_skintype') }}">
                         <div class="input-field">
                             <p>
@@ -183,7 +183,6 @@
             option.style.display = option.getAttribute('data-type') === selectedStep ? '' : 'none';
         }
 
-        // Reset the product name select
         productNameSelect.selectedIndex = 0;
         M.FormSelect.init(productNameSelect);
     });

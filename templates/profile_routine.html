@@ -8,7 +8,7 @@
     <div class="container">
         {% block content %}
         <!-- Display Skincare Entry History as Collapsible Cards -->
-        <h6>Skincare Entry History</h6>
+        <h6 class="white-text">Your Skincare History</h6>
         <ul class="collapsible">
             {% for date, day_entries in entries_by_date.items() %}
             <li>
@@ -16,7 +16,7 @@
                     <i class="material-icons"></i>
                     {{ date.strftime('%d %b %Y') }}
                 </div>
-                <div class="collapsible-body">
+                <div class="collapsible-body white black-text">
                     {% for entry in day_entries %}
                     <div class="card-panel">
                         <p><strong>Step:</strong> {{ entry.skincare_step }}</p>
