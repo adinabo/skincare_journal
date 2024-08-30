@@ -3,19 +3,9 @@ import unittest
 from flask import Flask
 from flask_pymongo import PyMongo
 import os
-
+from env import *
 
 mongo_uri = "URI"
-
-#try:
-#    client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
-#    client.server_info()  
-#    print("Database connected successfully")
-#except Exception as e:
-#    print(f"An error occurred: {e}")
-
-
-from env import *
 
 
 class MongoConnectionTest(unittest.TestCase):
@@ -29,11 +19,12 @@ class MongoConnectionTest(unittest.TestCase):
     def test_mongo_connection(self):
         with self.app.app_context():
             try:
-                # Test connection with a simple ping command
+                # Test connection with a ping command
                 self.mongo.cx.admin.command('ping')
                 print("MongoDB connection is successful!")
             except Exception as e:
                 self.fail(f"MongoDB connection failed: {e}")
+
 
 if __name__ == '__main__':
     unittest.main()
