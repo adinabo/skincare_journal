@@ -248,7 +248,7 @@ The tests.py file is designed to validate the connection to the MongoDB database
 
 The test aims to verify that the Flask application can connect to the MongoDB database using the URI.
 
-- Debugging
+## Debugging
 
 Throughout de development, I found it vital to add some debugging statement so I can understand why the app behavies in such a way. 
 
