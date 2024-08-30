@@ -1,3 +1,17 @@
+## Table of Contents
+- [The Challenge of Skincare Products](#the-challenge-of-skincare-products)
+- [UX Design Process](#ux-design-process)
+- [Features](#features)
+- [Database Structure and Data Model](#database-structure-and-data-model)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Deployment](#deployment)
+- [Bugs](#bugs)
+- [Testing](#testing)
+- [User Stories](#user-stories)
+- [Future features](#future-features)
+- [Credits](#credits)
+
 # Skincare Journal
 
 A Skincare Journal is a straightforward app designed to help users manage their skincare routines. 
@@ -83,7 +97,7 @@ After selecting their skin type, users will receive personalized product suggest
 <img src="static/images/products.jpg" alt="Products Page Preview" width="400">
 
 
-# MongoDB Database Structure and Data Model
+# Database Structure and Data Model
 
 The application utilizes a MongoDB database to effectively manage and store various types of data essential for delivering a personalized skincare experience to its users. The database is named Skincare_db and consists of the following collections:
 
@@ -164,6 +178,7 @@ Another major issue discovered during development is that a user's selected skin
 
 This bug also significantly affects the user experience by causing frustration and confusion. Users may believe their preferences are saved, only to find them missing later. Fixing this issue is crucial to ensuring that users can reliably set and maintain their skin type preferences across sessions.
 
+# Testing
 ## Manual Testing
 
 1. User Interface (UI) Testing:
@@ -215,10 +230,47 @@ Testing with JSLint has returned 1 warning, but is not actually a synthax error.
 
 [Python Linter testing results](https://pep8ci.herokuapp.com/#)
 
+- MongoDB Connection Test
+
+The tests.py file is designed to validate the connection to the MongoDB database. This is essential for ensuring that the app can successfully interact with the database to store and retrieve user data. I did have some issues with the connection, which took a long time for me to figure out, hence why I created this test to ensure the connection is succesful.
+
+The test aims to verify that the Flask application can connect to the MongoDB database using the URI.
+
+- Debugging
+
+Throughout de development, I found it vital to add some debugging statement so I can understand why the app behavies in such a way. 
+
+1. Printing Environment Variables
+To confirm that the URI is correctly loaded and eliminate any other potential issues from the start.
+
+2. Validating MongoDB Connection
+ To check if the connection to the MongoDB database is successful.
+
+3. User Login and Registration Debugging
+Such as display the username attempting to log in, confirming if the user is found in the database,and messages to indicate the success or failure of password checks.
+
+4. Monitoring User Registration
+When a new user registers, the application prints the username being registered, allowing the developer to verify the registration process.
+
+The development of the app was particularly challenging for me, as I initially started with PostgreSQL and later switched to MongoDB. This transition meant reorganizing my code significantly, but it ultimately helped me gain a deeper understanding of how both databases function. I’m glad I pushed myself into a difficult situation and successfully navigated through it.
+
 ## User Stories
 
 - As a user, I want to log my skincare products so that I can keep track of my routine.
 - As a user, I want personalized recommendations so that I can optimize my skincare routine.
 - As a user, I want to know the ingredients in my products so I can make an informed decision.
+- As a user, I want a clean, intuitive interface so that I can navigate the app easily and enjoy a seamless experience.
+- As a user, I want to be able to edit or delete my skincare entries so that I can manage changes in my routine over time.
+- As a user, I want to update my skin type, so I can get the most accurate product recommendations if my skin's needs change.
 
-# Future improvements
+## Future Features
+- **API Integration:** Plan to integrate APIs for a broader range of product recommendations.
+- **Calendar Feature:** Implement a calendar view to track the usage history of products.
+- **User Notifications:** Add reminders for skincare routines and product usage.
+- **Enhanced User Profiles:** Allow users to add more details to their profiles, like skin concerns and goals.
+
+## Credits
+- Newcastle College for support
+- Code Institute Tutoring service for their support
+- My Mentor Spencer Barribal
+- Special thanks to friends and family for testing the app and providing valuable feedback.
