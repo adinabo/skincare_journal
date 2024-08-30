@@ -61,11 +61,25 @@ Individuals, particularly women, who are passionate about maintaining and optimi
 
 **Real-World Application:**
 
+The Skincare Journal serves as a tool for anyone looking to streamline their skincare routine. It addresses common skincare challenges such as product confusion, the correct order of application, and, in the future, ingredients compatibility.
+
+In the future, the users will be able to buy the products directly from their account.
+
 ## UX Design Process
 
 ### Wireframes and Mock-ups 
-In the initial stages of development, wireframes were created using Figma to visualize the app’s layout and user flow. These wireframes served as a blueprint for the design, ensuring that the user interface was both intuitive and aesthetically pleasing.
+In the initial stages of development, wireframes were created using Figma, Balsamiq and Paint to visualize the app’s layout and user flow. These wireframes served as a blueprint for the design, ensuring that the user interface was both intuitive and aesthetically pleasing.
 However, I found myself changing the wireframes heavily during the development process, as I did not have a defined idea of what I wanted to achieve in terms of database.
+
+The Home Page, along with the Log In and Register pages, remained as originally planned. Initially, I had no clear vision of how the app would look after the user logged in, so the rest of the design evolved gradually as development progressed. 
+
+The same goes for the database. I began with the initial concept shown in the Database Wireframe, but I had to make some adjustments as I progressed.
+
+<img src="static/images/wireframe3.jpg" alt="Home Page Wireframe" width="300">
+<img src="static/images/wireframes2.jpg" alt="Log In Wireframe" width="300">
+<img src="static/images/wireframe4.jpg" alt="Database wireframe" width="300">
+<img src="static/images/wireframe1.jpg" alt="Home Page Wireframe" width="300">
+
 
 ### Design Decisions and Reasoning
 
