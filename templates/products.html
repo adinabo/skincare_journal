@@ -18,27 +18,35 @@
                         <p class="product_text white-text">{{ product.description }}</p> 
                         <p class="product_text">
                             <a href="#modal{{ product._id }}" class="modal-trigger light-blue-text text-lighten-4">See Ingredients</a> 
+                        </p>
                     </div>
                     <div class="card-action center-align">
                         <a href="{{ product.link }}" class="btn waves-effect waves-light pink darken-2 full-width-btn" target="_blank">Buy Now</a>
                     </div>
                 </div>
             </div>
-
             <!-- Modal Structure for Ingredients -->
-            <div id="modal{{ product._id }}" class="modal small-modal blue-grey darken-3"> 
+            <div id="modal{{ product._id }}" class="modal small-modal blue-grey darken-4"> 
                 <div class="modal-content">
-                    <h6 class="white-text">{{ product.name }}</h6> 
-                    <p class="white-text">{{ product.ingredients }}</p> 
+                    <h6 >{{ product.name }}</h6> 
+                    <p>{{ product.ingredients }}</p> 
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat white-text">Close</a> 
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a> 
                 </div>
-            </div>            
+            </div>           
             {% endfor %}
         </div>
     {% else %}
         <h5 class="center-align white-text">Please set your skin type to see recommendations.</h5>
     {% endif %}
 </div>
+
+<!-- Initialize Modals -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems);
+    });
+</script>
 {% endblock %}

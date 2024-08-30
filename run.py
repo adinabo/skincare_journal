@@ -279,6 +279,11 @@ def products():
     if 'user_skintype' in session:
         skin_type = session['user_skintype']
         products = list(mongo.db.products.find({"skin_type": skin_type}))
+
+        # Debugging: Print the product data to check if ingredients are being fetched correctly
+        for product in products:
+            print(f"Product: {product['name']} - Ingredients: {product.get('ingredients', 'No ingredients listed')}")
+
         return render_template("products.html", products=products)
     else:
         flash("Please set your skin type to get product recommendations.")
