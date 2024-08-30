@@ -96,6 +96,7 @@ The app saves the user entries according to the date. A calendar might be used i
 Upon accessing the website, users have the option to log in or register with a username and password of their choice. After successfully logging in or registering, they are prompted to select their skin type from four available options.
 
 To add a new skincare entry, users can choose the type of product (such as a cleanser, serum, moisturizer, or peeling/exfoliator), select a specific product from a list of recommendations tailored to their skin type, specify the time of day, and save the entry.
+
 <img src="static/images/skintype.jpg" alt="Skintype page preview" width="400">
 <img src="static/images/selectproduct.jpg" alt="Select products Preview" width="400">
 
@@ -119,7 +120,7 @@ The application utilizes a MongoDB database to effectively manage and store vari
 
 1. products
 
-The products collection stores information about various skincare products, including their names, types (e.g., cleanser, moisturizer, serum or peeling), skin type suitability (e.g., oily, dry, combination, sensitive), and ingredients.
+The products collection stores information about various skincare products, including their names, types (e.g., cleanser, moisturizer, serum or peeling), skin type suitability (e.g., oily, dry, combination, sensitive, normal), and ingredients.
 This data model allows the application to offer personalized product recommendations based on the user’s skin type, making it a critical component for achieving the app's goal of providing tailored skincare advice.
 This collection is essential for populating the product recommendations displayed to users. By associating each product with a specific skin type, the application can filter and suggest only those products that are most suitable for the user's skin, thus enhancing the user experience and increasing the relevance of the recommendations.
 
@@ -130,7 +131,7 @@ The skincare_entries collection logs individual skincare routine entries made by
 This collection is fundamental for tracking and managing the user's skincare routine. By storing each entry separately, the app allows users to monitor their skincare habits over time, see patterns in product usage, and make informed decisions about their routine. It also supports features like viewing, editing(by deleting and adding a new entry), and deleting past entries, providing users with comprehensive control over their skincare regimen.
 
 3. user_skintype
-The user_skintype collection holds information about each user’s skin type. Each document is associated with a specific user and records their chosen skin type (e.g., oily, dry, combination, sensitive).
+The user_skintype collection holds information about each user’s skin type. Each document is associated with a specific user and records their chosen skin type (e.g., oily, dry, combination, sensitive, normal).
 
 This collection is crucial for delivering personalized recommendations on the Products page, but also when the user is adding a new entry. By storing the user’s skin type, the app can customize the product suggestions it provides, ensuring that users receive the most appropriate advice for their unique skin needs. This personalization is a key feature of the app, making the user experience more relevant and effective.
 
@@ -157,30 +158,23 @@ Each collection is designed to serve a specific purpose within the application, 
 
 ## Installation
 
-To install the game locally, follow these steps:
+To install and run the app locally:
 
-1. Clone the repository using the following command:
-
-git clone https:// https://github.com/adinabo/skincare_journal
-
-2. Open the project folder and open home.html in your preferred browser.
+1. Clone the repository git clone https:// https://github.com/adinabo/skincare_journal
+2. Navigate to the project folder: cd skincare_journal
+3. Install the required dependencies: pip install -r requirements.txt
+4. Run the app: run.py 
+5. Open the app 
 
 ## Deployment
 
 1. Create a Heroku Account: Set up an account on Heroku.
-
 2. Prepare the Application: Ensure that the application is ready for deployment by setting up a requirements.txt file with all the necessary dependencies and a Procfile to specify the command used to run the app.
-
 3. Initialize a Git Repository: If not already done, initialize a Git repository and commit all changes.
-
 4. Create a New Heroku App: Use the Heroku dashboard or CLI to create a new app.
-
 5. Connect the App to Heroku: Connect the Heroku app to the GitHub repository or push directly from the command line.
-
 6. Configure Environment Variables: Set up the necessary environment variables (such as MONGO_URI and SECRET_KEY) in the Heroku dashboard under the "Settings" tab.
-
 7. Deploy the Application: Deploy the app either via GitHub integration or manually by pushing to Heroku using the git push heroku main command.
-
 8. Monitor and Debug: Use the Heroku logs to monitor the app’s performance and debug any issues that may arise.
 
 Live site https://skincare-journal-593ff8247ab4.herokuapp.com/
@@ -198,6 +192,8 @@ This bug significantly impacts the user experience, as it effectively locks user
 Another major issue discovered during development is that a user's selected skin type is only temporarily saved in the database. After restarting the server, the skin type appears to be deleted or lost, and the user needs to update their skin type again.
 
 This bug also significantly affects the user experience by causing frustration and confusion. Users may believe their preferences are saved, only to find them missing later. Fixing this issue is crucial to ensuring that users can reliably set and maintain their skin type preferences across sessions.
+
+3. Some visual inconsistencies when opening the ingredients modal.
 
 # Testing
 ## Manual Testing
@@ -217,11 +213,6 @@ The app was tested on various devices, including desktops, tablets, and smartpho
 Testers (friends and family) explored the app to identify any unexpected behavior or bugs.
 
 ## Automated Testing
-
-W3C HTML Validator: HTML was validated using the W3C HTML Validator to ensure proper syntax and compliance with web standards.
-CSS Validator: CSS was validated using the W3C CSS Validator to catch any errors in styling.
-Google Lighthouse: The app's performance, accessibility, and best practices were evaluated using Google Lighthouse.
-
 
 - WS3 HTML Testing Validator
 
@@ -293,7 +284,7 @@ The development of the app was particularly challenging for me, as I initially s
 - **User Notifications:** Add reminders for skincare routines and product usage.
 - **Enhanced User Profiles:** Allow users to add more details to their profiles, like skin concerns 
 and goals.
-- **Improved UI/UX:** While I am generally satisfied with the app's appearance, I feel that the interface looks and feels a bit outdated once users log in. 
+- **Improved UI/UX:** While I am generally satisfied with the appearance, I feel that the interface looks and feels a bit outdated once users log in. 
 
 ## Credits
 - Newcastle College for support
