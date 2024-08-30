@@ -23,8 +23,10 @@ The inspiration for this project came from my passion for skincare, and I saw th
 
 However, I encountered challenges in finding APIs that would be suitable for my app, and that is how I decided to develop a Skincare Journal instead, leaving the door open for my initial idea. 
 
+Live site https://skincare-journal-593ff8247ab4.herokuapp.com/
 
 # The Challenge of skincare products
+
 In today's world, skincare is not just a routine—it's a significant aspect of self-care, well-being, and confidence. With the beauty industry booming, there is an overwhelming variety of skincare products available on the market, each promising specific benefits. For skincare enthusiasts and beginners alike, navigating this sea of options can be daunting. The challenges are multifaceted:
 
 Product Confusion: The sheer number of available products can lead to confusion. Users often struggle to remember which products to use and when, especially when managing a multi-step routine that includes cleansers, moisturizers, serums, and more.
@@ -166,17 +168,23 @@ git clone https:// https://github.com/adinabo/skincare_journal
 
 ## Deployment
 
-The website was successfully deployed to GitHub. Steps to deploy it:
+1. Create a Heroku Account: Set up an account on Heroku.
 
-1. Go to the **Settings** tab in the GitHub repository.
+2. Prepare the Application: Ensure that the application is ready for deployment by setting up a requirements.txt file with all the necessary dependencies and a Procfile to specify the command used to run the app.
 
-2. Scroll down to **GitHub Pages** and click on **"Check it out here!"**
+3. Initialize a Git Repository: If not already done, initialize a Git repository and commit all changes.
 
-3. Make sure to choose **"main"** under **"Source"**.
+4. Create a New Heroku App: Use the Heroku dashboard or CLI to create a new app.
 
-4. The page will automatically refresh, showing a detailed ribbon display confirming the deployment.
+5. Connect the App to Heroku: Connect the Heroku app to the GitHub repository or push directly from the command line.
 
-The live site can be found at the following link: https:/ ####################
+6. Configure Environment Variables: Set up the necessary environment variables (such as MONGO_URI and SECRET_KEY) in the Heroku dashboard under the "Settings" tab.
+
+7. Deploy the Application: Deploy the app either via GitHub integration or manually by pushing to Heroku using the git push heroku main command.
+
+8. Monitor and Debug: Use the Heroku logs to monitor the app’s performance and debug any issues that may arise.
+
+Live site https://skincare-journal-593ff8247ab4.herokuapp.com/
 
 ## Bugs
 
