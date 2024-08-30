@@ -149,9 +149,8 @@ Each collection is designed to serve a specific purpose within the application, 
 - Python
 - Flask
 - Mongo Atlas and Compass 
-- Figma 
+- Figma, Balsamiq and Paint for wireframes
 - Git and Github for version control
-- Visual Studio Code
 - Chrome developer tools
 - Pexels for images
 - Materialize
@@ -195,7 +194,7 @@ The problem stems from how the session is managed and how user authentication is
 
 This bug significantly impacts the user experience, as it effectively locks users out of their accounts once they log out. Resolving this issue is critical to ensure that users can seamlessly log in and out of the application as needed.
 
-2. Skin Type Only Temporarily Saved in the Database
+2. Skin Type Only Temporarily Saved in the Database, user has to update it everytime they log in 
 Another major issue discovered during development is that a user's selected skin type is only temporarily saved in the database. After restarting the server, the skin type appears to be deleted or lost, and the user needs to update their skin type again.
 
 This bug also significantly affects the user experience by causing frustration and confusion. Users may believe their preferences are saved, only to find them missing later. Fixing this issue is crucial to ensuring that users can reliably set and maintain their skin type preferences across sessions.
@@ -269,7 +268,9 @@ To confirm that the URI is correctly loaded and eliminate any other potential is
  To check if the connection to the MongoDB database is successful.
 
 3. User Login and Registration Debugging
-Such as display the username attempting to log in, confirming if the user is found in the database,and messages to indicate the success or failure of password checks.
+Such as display the username attempting to log in, confirming if the user is found in the database,and messages to indicate the success or failure of password checks. This test has passed. 
+However, when the user manually logs out, they are unable to log back in. Interestingly, logging in works perfectly fine when the session expires.
+Steps are being taken to resolve this issue. 
 
 4. Monitoring User Registration
 When a new user registers, the application prints the username being registered, allowing the developer to verify the registration process.
@@ -286,10 +287,13 @@ The development of the app was particularly challenging for me, as I initially s
 - As a user, I want to update my skin type, so I can get the most accurate product recommendations if my skin's needs change.
 
 ## Future Features
+
 - **API Integration:** Plan to integrate APIs for a broader range of product recommendations.
 - **Calendar Feature:** Implement a calendar view to track the usage history of products.
 - **User Notifications:** Add reminders for skincare routines and product usage.
-- **Enhanced User Profiles:** Allow users to add more details to their profiles, like skin concerns and goals.
+- **Enhanced User Profiles:** Allow users to add more details to their profiles, like skin concerns 
+and goals.
+- **Improved UI/UX:** While I am generally satisfied with the app's appearance, I feel that the interface looks and feels a bit outdated once users log in. 
 
 ## Credits
 - Newcastle College for support
